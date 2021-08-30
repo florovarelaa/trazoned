@@ -1,0 +1,97 @@
+* {
+    display: flex;
+}
+
+body {
+    background-color: #669966;
+    width: 100%;
+    justify-content: center;
+}
+
+/* UI -- START */
+
+
+/* BOARD */
+
+#board {
+    flex-direction: column;
+    padding: 2.5px;
+}
+
+#board .board-row {
+    flex-direction: row;
+}
+
+.board-cell {
+    border: 2.5px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-cell.even {
+    background-color: #FFCC88;
+}
+
+.board-cell.odd {
+    background-color: #FFDD66;
+}
+
+.board-unit-img {
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BOARD - END */
+
+
+/* USER-UI - START */
+
+#ui-user {
+    flex-direction: column;
+    text-transform: bold;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+#ui-players-container {
+    height: 100%;
+    flex-direction: column;
+    font-weight: 600;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.ui-unit {
+    flex-direction: column;
+    padding: 10px;
+}
+
+.ui-unit > button {
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.unit-name {
+    font-size: 24px;
+}
+
+.unit-health {
+    font-size: 20px;
+}
+
+/* UI -- END */
+
+.cd94d3 {
+    background-color: #cd94d3 !important;
+}
+
+.c06582 {
+    background-color: #c06582 !important;
+}
+
+.e7a7bb {
+    background-color: #e7a7bb !important;
+}

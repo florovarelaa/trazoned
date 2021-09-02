@@ -73,5 +73,8 @@ export function unit(id, playerId, name, health, position, abilities, steps) {
             selectedPositionIndex: selectedPositionIndex,
             selectedPositionInMap: selectedPositionInMap
         }
+    },
+    this.damage = (damage) => {
+        this.health = this.health - damage
     }
 }

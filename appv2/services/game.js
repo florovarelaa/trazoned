@@ -68,19 +68,31 @@ export let gameService = {
 
             this.updatePlayersUnitsPositionsAtStepFromAbility(players, step)
 
-            players.forEach(player => player.units.forEach( unit => console.log(unit.name, unit.position)))
-            // this.executeStepNonMovingAbilities(players, step)
             players.forEach( player => {
                 player.units.forEach( unit => {
-                    console.log(unit.name, unit.steps[step].ability.selectedPositionInMap)
                     if (unit.collided) return
                     if ((unit.steps[step].ability !== null) && !(unit.steps[step].ability.ability.isMovement)) {
-                        let selectedPosition = unit.steps[step].ability.selectedPositionInMap
+                        let ability = unit.steps[step].ability
+                        let selectedPosition = ability.selectedPositionInMap
+                        let selectedPositionIndex = ability.selectedPositionIndex
+                        let selectedPositionIndexAsKey = `${selectedPositionIndex[0]}${selectedPositionIndex[1]}`
+                        let affectPositions = ability.ability.affectPositions[selectedPositionIndexAsKey]
+                        
+                        affectPositions = affectPositions.map( position => {
+                            return [position[0] + selectedPosition.x, position[1] + selectedPosition.y]
+                        }).filter( position => {
+                            return movementService.positionIsWithinBoardBounds(position, boardSize)
+                        }).forEach( position => {
+                            let positionAsKey = `x:${position[0]}y:${position[1]}`
+                            if (positionAsKey in stepUnitsPositionAfterMovement) {
+                                stepUnitsPositionAfterMovement[positionAsKey].damage(ability.ability.damage)
+                            }
+                        })
                     }
                 })
-            })            
+            })
         }
-        // return players
+        return players
     },
     updatePlayersUnitsPositionsAtStepFromMovement(players, step){
         players.forEach( player => {

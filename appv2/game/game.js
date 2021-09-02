@@ -46,6 +46,7 @@ export let game = {
 
         //The actions are executed
         players = gameService.executeStepsActions(players, numberOfSteps, boardSize)
+        players.forEach(player => console.log(player))
      },
     nextFase(state) {
     },

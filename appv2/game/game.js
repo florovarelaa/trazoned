@@ -1,6 +1,5 @@
 import { initializePlayers } from '../services/players.js'
 import { gameService } from '../services/game.js'
-import util from 'util'
 // import { uiService } from '../services/ui.js'
 
 export let game = {
@@ -30,7 +29,6 @@ export let game = {
                 let movement = player.movements[0]
                 player.units.forEach( (unit, unitIndex) => {
                     if (unit.isAlive() ) {
-
                         let potentialStepMovementPositions = gameService.unitPotentialStepMovementPositions(unit, movement, step, boardSize)
                         let selectedPosition = potentialStepMovementPositions[0]
                         

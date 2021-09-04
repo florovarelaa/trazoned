@@ -2,6 +2,7 @@ import { movementService } from './movement.js'
 
 export let gameService = {
     unitPotentialStepMovementPositions(unit, movement, step, boardSize) {
+        console.log(unit.name, ' movement:  ', movement)
         // It has to check for previous steps movements selected by the player with either movement or ability
         // uiService.setUiDisabled()
         let position = unit.getPositionPreviousToMovement(step)
@@ -9,6 +10,7 @@ export let gameService = {
         return potentialPositions
     },
     unitPotentialStepAbilityPositions(unit, ability, step, boardSize) {
+        console.log(unit.name, ' ability: ', ability)
         let position = unit.getPositionPreviousToAbility(step)
         let potentialPositions = movementService.getMovementPotentialPositions(position, ability.selectPosition, boardSize)
         

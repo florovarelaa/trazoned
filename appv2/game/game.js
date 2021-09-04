@@ -47,7 +47,10 @@ export let game = {
         }
         
         //The actions are executed
-        players = gameService.executeStepsActions(players, numberOfSteps, boardSize)
+        for (let step = 0; step < numberOfSteps; step++) {            
+            players = gameService.executeStepActions(players, step, boardSize)
+        }
+        
         this.nextFase(this.state)
         // players.forEach(player => console.log(util.inspect(player, {showHidden: false, depth: null})))
      },

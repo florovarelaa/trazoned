@@ -20,78 +20,76 @@ export let gameService = {
     unitSetStepAbility(unit, ability, step, selectedPositionIndex, selectedPositionInMap) {
         unit.setStepAbility(ability, step, selectedPositionIndex, selectedPositionInMap)
     },
-    executeStepsActions(players, numberOfSteps, boardSize) {
-        for (let step = 0; step < numberOfSteps; step++) {
-            let stepUnitsPositionAfterMovement = {}
-            players.forEach(player => {
-                player.units.forEach( unit => {
-                    if (unit.collided) return
-                    let futurePosition
-                    if (unit.steps[step].movement !== null) {
-                        futurePosition = unit.steps[step].movement.selectedPositionInMap
-                    } else {
-                        futurePosition = unit.position
-                    }
+    executeStepActions(players, step, boardSize) {
+        let stepUnitsPositionAfterMovement = {}
+        players.forEach(player => {
+            player.units.forEach( unit => {
+                if (unit.collided) return
+                let futurePosition
+                if (unit.steps[step].movement !== null) {
+                    futurePosition = unit.steps[step].movement.selectedPositionInMap
+                } else {
+                    futurePosition = unit.position
+                }
 
-                    let key = `x:${futurePosition.x}y:${futurePosition.y}`
+                let key = `x:${futurePosition.x}y:${futurePosition.y}`
 
-                    if ( key in stepUnitsPositionAfterMovement) {
-                        stepUnitsPositionAfterMovement[key].collided = true
-                        unit.collided = true
-                    } else {
-                        stepUnitsPositionAfterMovement[key] = unit
-                    }
-                })
-            });
-            this.updatePlayersUnitsPositionsAtStepFromMovement(players, step)
-            stepUnitsPositionAfterMovement = {}
-            players.forEach( player => {
-                player.units.forEach( unit => {
-                    if (unit.collided) return
-                    let futurePosition
-                    if ((unit.steps[step].ability !== null) && (unit.steps[step].ability.ability.isMovement)) {
-                        futurePosition = unit.steps[step].ability.selectedPositionInMap
-                    } else {
-                        futurePosition = unit.position
-                    }
-
-                    let key = `x:${futurePosition.x}y:${futurePosition.y}`
-
-                    if ( key in stepUnitsPositionAfterMovement) {
-                        stepUnitsPositionAfterMovement[key].collided = true
-                        unit.collided = true
-                    } else {
-                        stepUnitsPositionAfterMovement[key] = unit
-                    }
-                })
+                if ( key in stepUnitsPositionAfterMovement) {
+                    stepUnitsPositionAfterMovement[key].collided = true
+                    unit.collided = true
+                } else {
+                    stepUnitsPositionAfterMovement[key] = unit
+                }
             })
+        });
+        this.updatePlayersUnitsPositionsAtStepFromMovement(players, step)
+        stepUnitsPositionAfterMovement = {}
+        players.forEach( player => {
+            player.units.forEach( unit => {
+                if (unit.collided) return
+                let futurePosition
+                if ((unit.steps[step].ability !== null) && (unit.steps[step].ability.ability.isMovement)) {
+                    futurePosition = unit.steps[step].ability.selectedPositionInMap
+                } else {
+                    futurePosition = unit.position
+                }
 
-            this.updatePlayersUnitsPositionsAtStepFromAbility(players, step)
+                let key = `x:${futurePosition.x}y:${futurePosition.y}`
 
-            players.forEach( player => {
-                player.units.forEach( unit => {
-                    if (unit.collided) return
-                    if ((unit.steps[step].ability !== null) && !(unit.steps[step].ability.ability.isMovement)) {
-                        let ability = unit.steps[step].ability
-                        let selectedPosition = ability.selectedPositionInMap
-                        let selectedPositionIndex = ability.selectedPositionIndex
-                        let selectedPositionIndexAsKey = `${selectedPositionIndex[0]}${selectedPositionIndex[1]}`
-                        let affectPositions = ability.ability.affectPositions[selectedPositionIndexAsKey]
-                        
-                        affectPositions = affectPositions.map( position => {
-                            return [position[0] + selectedPosition.x, position[1] + selectedPosition.y]
-                        }).filter( position => {
-                            return movementService.positionIsWithinBoardBounds(position, boardSize)
-                        }).forEach( position => {
-                            let positionAsKey = `x:${position[0]}y:${position[1]}`
-                            if (positionAsKey in stepUnitsPositionAfterMovement) {
-                                stepUnitsPositionAfterMovement[positionAsKey].damage(ability.ability.damage)
-                            }
-                        })
-                    }
-                })
+                if ( key in stepUnitsPositionAfterMovement) {
+                    stepUnitsPositionAfterMovement[key].collided = true
+                    unit.collided = true
+                } else {
+                    stepUnitsPositionAfterMovement[key] = unit
+                }
             })
-        }
+        })
+
+        this.updatePlayersUnitsPositionsAtStepFromAbility(players, step)
+
+        players.forEach( player => {
+            player.units.forEach( unit => {
+                if (unit.collided) return
+                if ((unit.steps[step].ability !== null) && !(unit.steps[step].ability.ability.isMovement)) {
+                    let ability = unit.steps[step].ability
+                    let selectedPosition = ability.selectedPositionInMap
+                    let selectedPositionIndex = ability.selectedPositionIndex
+                    let selectedPositionIndexAsKey = `${selectedPositionIndex[0]}${selectedPositionIndex[1]}`
+                    let affectPositions = ability.ability.affectPositions[selectedPositionIndexAsKey]
+                    
+                    affectPositions = affectPositions.map( position => {
+                        return [position[0] + selectedPosition.x, position[1] + selectedPosition.y]
+                    }).filter( position => {
+                        return movementService.positionIsWithinBoardBounds(position, boardSize)
+                    }).forEach( position => {
+                        let positionAsKey = `x:${position[0]}y:${position[1]}`
+                        if (positionAsKey in stepUnitsPositionAfterMovement) {
+                            stepUnitsPositionAfterMovement[positionAsKey].damage(ability.ability.damage)
+                        }
+                    })
+                }
+            })
+        })
         return players
     },
     updatePlayersUnitsPositionsAtStepFromMovement(players, step){

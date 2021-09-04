@@ -13,5 +13,7 @@ export let config = {
     boardSize: boardSize,
     ui: config_ui,
     numberOfSteps: numberOfSteps,
-    initialUnitsHealth: initialUnitsHealth
+    initialUnitsHealth: initialUnitsHealth,
+    isGameOver: false,
+    winner: null
 }

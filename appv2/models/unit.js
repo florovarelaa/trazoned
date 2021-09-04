@@ -31,6 +31,12 @@ export function unit(id, playerId, name, health, position, abilities, steps) {
     this.initializeSteps = (numberOfSteps) => {
         this.steps = new Array(numberOfSteps).fill({ability: null, movement: null})
     },
+    this.resetSteps = () => {
+        this.steps.forEach( step => {
+            step.ability = null
+            step.movement = null
+        })
+    },
     this.getPositionPreviousToMovement = (step) => {
         for (let i = step - 1; 0 <= i; i--) {
             let element = this.steps[i];
@@ -76,5 +82,8 @@ export function unit(id, playerId, name, health, position, abilities, steps) {
     },
     this.damage = (damage) => {
         this.health = this.health - damage
+    },
+    this.isAlive = () => {
+        return this.health > 0
     }
 }

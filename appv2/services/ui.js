@@ -6,6 +6,7 @@ export let uiService = {
         setNextFaseBtn(nextFaseFunc)
         createPlayersBtn(players, initialUnitsHealth)
         addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc, boardSize)
+        drawUnitsOnBoard(players, ui.cellSize)
         // this.setUiDisabled()
     },
     setUiDisabled: setUiDisabled,
@@ -145,3 +146,26 @@ function setUiEnabled() {
     })
 }
 
+function drawUnitsOnBoard(players, cellSize) {
+    players.forEach( player => {
+        player.units.forEach(unit => {
+            drawUnitOnBoard(unit, player.color, cellSize)
+        })
+    })
+}
+
+
+function drawUnitOnBoard(unit, color, cellSize) {
+    let unitImage = document.createElement('div')
+    unitImage.innerHTML = unit.name;
+    let unitImageDimensions = cellSize - 0.15 * cellSize
+    unitImage.style.width = `${unitImageDimensions}px`
+    unitImage.style.height = `${unitImageDimensions}px`
+    unitImage.style.backgroundColor = color;
+    unitImage.classList.add('board-unit-img')
+    unitImage.style.fontSize = `${0.25 * cellSize}px`
+    //Aca es el arreglo
+    //let cellId = (position.x != undefined && position.y !=undefined ) ? `${position.x}${position.y}` : position
+    let cellId = `x${unit.position.x}y${unit.position.y}`
+    document.getElementById(cellId).appendChild(unitImage)
+}

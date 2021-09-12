@@ -36,7 +36,7 @@ const warrior1 = new ability(
 )
 
 const mage1 = new ability(
-    2, 'mage_second',movements.king, movements.king, true, null, 'move 1 position'
+    2, 'mage_second', movements.king, movements.king, true, null, 'move 1 position'
 )
 
 export let abilities = {

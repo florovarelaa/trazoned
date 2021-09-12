@@ -5,7 +5,7 @@ const numberOfSteps = 1
 const initialUnitsHealth = 10
 
 const config_ui = {
-    cellSize: 75,
+    cellSize: 45,
 }
 
 export let config = {
@@ -13,5 +13,7 @@ export let config = {
     boardSize: boardSize,
     ui: config_ui,
     numberOfSteps: numberOfSteps,
-    initialUnitsHealth: initialUnitsHealth
+    initialUnitsHealth: initialUnitsHealth,
+    isGameOver: false,
+    winner: null
 }

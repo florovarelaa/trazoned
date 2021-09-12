@@ -14,9 +14,11 @@ export function setUnitStartingPosition(unit, unitIndex, startingPosition, board
     if ( (startingPosition.x === 0) || (startingPosition.x === boardSize)) {
         unitStartingPosition = {x: startingPosition.x, y: startingPosition.y + unitIndex}
         unit.setPosition( unitStartingPosition )
+        unit.setStartingPosition( unitStartingPosition )
     } else {
         unitStartingPosition = {x: startingPosition.x + unitIndex, y: startingPosition.y}
         unit.setPosition( unitStartingPosition )
+        unit.setStartingPosition( unitStartingPosition )
     }
 }
 

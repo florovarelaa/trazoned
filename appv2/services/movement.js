@@ -1,5 +1,6 @@
 export const movementService = {
-    getMovementPotentialPositions: getMovementPotentialPositions
+    getMovementPotentialPositions: getMovementPotentialPositions,
+    positionIsWithinBoardBounds: positionIsWithinBoardBounds
 }
 
 function getMovementPotentialPositions(position, movement, boardSize) {

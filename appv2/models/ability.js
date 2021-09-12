@@ -1,13 +1,13 @@
-export function ability(id, name, selectPositions, affectPositions, isMovement, damage, text) {
+export function ability(id, name, selectPosition, affectPositions, isMovement, damage, text) {
     this.name = name
     this.id = id,
-    this.selectPositions = selectPositions,
+    this.selectPosition = selectPosition,
     this.affectPositions = affectPositions,
     this.isMovement = isMovement, 
     this.damage = damage,
     this.text = text,
-    this.setSelectPositions = (selectPositions) => {
-        this.selectPositions = selectPositions
+    this.setSelectPosition = (selectPosition) => {
+        this.selectPosition = selectPosition
     },
     this.setAffectPositions = (affectPositions) => {
         this.affectPositions = affectPositions

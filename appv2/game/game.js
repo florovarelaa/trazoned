@@ -23,7 +23,7 @@ export let game = {
         let boardSize = this.state.boardSize
         let players = this.state.players
         // players make moves and use abilities on each of the turn first fase steps        
-        for (let step = 0; step < this.state.numberOfSteps; step++) {
+        for (let step = 0; step < numberOfSteps; step++) {
             players.forEach( (player, playerIndex) => {
                 let movement = player.movements[0]
                 player.units.forEach( (unit, unitIndex) => {
@@ -41,7 +41,7 @@ export let game = {
         // console.log(JSON.stringify(this.state, null, 2));
 
         //The actions are executed
-        gameService.executeStepsActions(players, numberOfSteps, boardSize)
+        gameService.executeStepsActions(players, this.state.numberOfSteps, boardSize)
 
      },
     nextFase(state) {

@@ -20,6 +20,22 @@ export let gameService = {
         unit.setStepAbility(ability, step, selectedPositionIndex, selectedPositionInMap)
     },
     executeStepsActions(players, numberOfSteps, boardSize) {
+        let boardStateOnStep = new Array(boardSize).fill(null).map(() => new Array(boardSize).fill(null))
 
+        for (let step = 0; step < numberOfSteps; step++) {
+            players.forEach( (player, playerIndex) => {
+                let movement = player.movements[0]
+                player.units.forEach( (unit, unitIndex) => {
+                    let potentialStepMovementPositions = gameService.unitPotentialStepMovementPositions(unit, movement, step, boardSize)
+                    let selectedPosition = potentialStepMovementPositions[1]
+                    gameService.unitSetStepMovement(unit, movement, step, selectedPosition.positionIndex, selectedPosition.position)
+            
+                    let ability = unit.abilities[0]
+                    let potentialStepAbilityPoistions = gameService.unitPotentialStepAbilityPositions(unit, ability, step, boardSize)
+                    selectedPosition = potentialStepAbilityPoistions[1]
+                    gameService.unitSetStepAbility(unit, ability, step, selectedPosition.positionIndex, selectedPosition.position)
+                })
+            })            
+        }
     }
 }

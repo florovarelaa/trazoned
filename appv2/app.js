@@ -8,9 +8,9 @@ import { gameService } from './services/game.js'
     game.createGame(config)
     uiService.buildUi(
         game.getState(),
-        () => game.nextFase(game.getState()),
-        (unit, movement, step, boardSize) => gameService.unitPotentialStepMovementPositions(unit, movement, step, boardSize),
-        (unit, ability, step, boardSize) => gameService.unitPotentialStepAbilityPositions(unit, ability, step, boardSize)
+        () => game.nextFase(),
+        (unit, movement, step, boardSize, potentialMovementColor) => gameService.unitPotentialStepMovementPositions(unit, movement, step, boardSize, potentialMovementColor),
+        (unit, ability, step, boardSize, potentialAbilityColor) => gameService.unitPotentialStepAbilityPositions(unit, ability, step, boardSize, potentialAbilityColor)
     )
     // game.simulateGame()
 // })

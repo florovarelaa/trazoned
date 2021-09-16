@@ -19,10 +19,7 @@ export let game = {
     // uiService: uiService,
     gameService: gameService,
     simulateGame() {
-        let boardSize = this.state.boardSize
-        let players = this.state.players
-        let numberOfSteps = this.state.numberOfSteps
-
+        let { boardSize, players, numberOfSteps } = this.state
         // players make moves and use abilities on each of the turn first fase steps        
         for (let step = 0; step < numberOfSteps; step++) {
             players.forEach( (player, playerIndex) => {
@@ -43,17 +40,19 @@ export let game = {
                 })
             })            
         }
-        
+                
+        this.nextFase(this.state)
+        // players.forEach(player => console.log(util.inspect(player, {showHidden: false, depth: null})))
+     },
+    nextFase() {
         //The actions are executed
-        
+        let state = this.getState()
+        let { boardSize, players, numberOfSteps } = state
+
         for (let step = 0; step < numberOfSteps; step++) {            
             players = gameService.executeStepActions(players, step, boardSize)
         }
         
-        this.nextFase(this.state)
-        // players.forEach(player => console.log(util.inspect(player, {showHidden: false, depth: null})))
-     },
-    nextFase(state) {   
         let playersWithAliveUnits = state.players.filter( player => {
             return player.hasAliveUnits()
         })

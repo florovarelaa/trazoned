@@ -15,5 +15,7 @@ export let config = {
     numberOfSteps: numberOfSteps,
     initialUnitsHealth: initialUnitsHealth,
     isGameOver: false,
-    winner: null
+    winner: null,
+    potentialMovementColor: "9370DB",
+    potentialAbilityColor: "800080"
 }

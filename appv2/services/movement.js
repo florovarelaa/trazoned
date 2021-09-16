@@ -1,6 +1,13 @@
 export const movementService = {
     getMovementPotentialPositions: getMovementPotentialPositions,
-    positionIsWithinBoardBounds: positionIsWithinBoardBounds
+    positionIsWithinBoardBounds: positionIsWithinBoardBounds,
+    unitPotentialStepMovementPositions(unit, movement, step, boardSize) {
+        // uiService.setUiDisabled()
+        // It has to check for previous steps movements selected by the player with either movement or ability
+        let position = unit.getPositionPreviousToMovement(step)
+        let potentialPositions = movementService.getMovementPotentialPositions(position, movement, boardSize)
+        return potentialPositions
+    }
 }
 
 function getMovementPotentialPositions(position, movement, boardSize) {

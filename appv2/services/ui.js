@@ -1,16 +1,18 @@
 export let uiService = {
     buildUi(config, nextFaseFunc, moveBtnFunc, abilityBtnFunc) {
         this.config = config
-        let { ui, boardSize, players, initialUnitsHealth } = config
+        let { ui, boardSize, players, initialUnitsHealth, potentialMovementColor, potentialAbilityColor } = config
         createBoard(boardSize, ui.cellSize)
-        setNextFaseBtn(nextFaseFunc)
+        setNextFaseBtn(nextFaseFunc, config)
         createPlayersBtn(players, initialUnitsHealth)
-        addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc, boardSize)
+        addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc, boardSize, potentialMovementColor, potentialAbilityColor)
         drawUnitsOnBoard(players, ui.cellSize)
         // this.setUiDisabled()
     },
     setUiDisabled: setUiDisabled,
-    setUiEnabled: setUiEnabled
+    setUiEnabled: setUiEnabled, 
+    addColorAvailablePositions: addColorAvailablePositions,
+    removeColorAvailablePositions: removeColorAvailablePositions
 }
 
 function createBoard(boardSize, cellSize) {
@@ -51,9 +53,14 @@ function colorBoardCell(cell, i,j) {
     }
 }
 
-function setNextFaseBtn(nextFaseFunc) {
+function setNextFaseBtn(nextFaseFunc, config) {
     let nextFaseBtn = document.getElementById('btn-next-fase')
-    nextFaseBtn.onclick = nextFaseFunc
+    nextFaseBtn.addEventListener('click', () => {
+        nextFaseFunc()
+        eraseUnitsOnBoard()
+        drawUnitsOnBoard(config.players, config.ui.cellSize)
+        updateUnitsHealth(config.players, config.initialUnitsHealth)
+    })
 }
 
 function createPlayersBtn(players, initialUnitsHealth) {
@@ -105,7 +112,7 @@ function createUiTag(tagName, id, parentNode, classes, innerHTML) {
 }
 
 
-function addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc, boardSize) {
+function addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc, boardSize, potentialMovementColor, potentialAbilityColor) {
     players.forEach( (player, playerIndex) => {
         let playerId = `ui-player-${playerIndex}`
         let units = player.units
@@ -114,13 +121,13 @@ function addEventListenersToPlayersButtons(players, moveBtnFunc, abilityBtnFunc,
                 let moveButtonId = `${playerId}-unit-${unitIndex}-step-${stepIndex}-move`
                 let moveButton = document.getElementById(moveButtonId)
                 
-                moveButton.addEventListener('click', () => moveBtnFunc(unit, player.movements[0], stepIndex, boardSize))
+                moveButton.addEventListener('click', () => moveBtnFunc(unit, player.movements[0], stepIndex, boardSize, potentialMovementColor))
 
                 let unitAbilities = unit.abilities
                 unitAbilities.forEach( (ability, abilityIndex) => {
                     let abilityButtonId = `${playerId}-unit-${unitIndex}-ability-${abilityIndex}-step-${stepIndex}`
                     let abilityButton = document.getElementById(abilityButtonId)
-                    abilityButton.addEventListener('click', () => abilityBtnFunc(unit, ability, stepIndex, boardSize))
+                    abilityButton.addEventListener('click', () => abilityBtnFunc(unit, ability, stepIndex, boardSize, potentialAbilityColor))
                 })
             })
         })
@@ -154,6 +161,13 @@ function drawUnitsOnBoard(players, cellSize) {
     })
 }
 
+function eraseUnitsOnBoard() {
+    let cellsWithUnits = document.getElementsByClassName('board-unit-img')
+    cellsWithUnits = Array.prototype.slice.call( cellsWithUnits )
+    cellsWithUnits.forEach( element => {
+        element.parentNode.removeChild(element)
+    })
+}
 
 function drawUnitOnBoard(unit, color, cellSize) {
     let unitImage = document.createElement('div')
@@ -168,4 +182,31 @@ function drawUnitOnBoard(unit, color, cellSize) {
     //let cellId = (position.x != undefined && position.y !=undefined ) ? `${position.x}${position.y}` : position
     let cellId = `x${unit.position.x}y${unit.position.y}`
     document.getElementById(cellId).appendChild(unitImage)
+}
+
+function addColorAvailablePositions(positions, color) {
+    positions.forEach( position => {
+        let cellId = `x${position.position.x}y${position.position.y}`
+        let cellHtmlElementdocument = document.getElementById(cellId)
+        cellHtmlElementdocument.classList.add(`color-${color}`)
+    })
+}
+
+function removeColorAvailablePositions(positions, color) {
+    positions.forEach( position => {
+        let cellId = `x${position.position.x}y${position.position.y}`
+        let cellHtmlElementdocument = document.getElementById(cellId)
+        cellHtmlElementdocument.classList.remove(`color-${color}`)
+    })
+}
+
+function updateUnitsHealth(players, initialUnitsHealth) {
+    players.forEach( (player, playerIndex) => {
+        let idPlayer = `ui-player-${playerIndex}`
+
+        player.units.forEach( (unit, unitIndex) => {
+            let idUnit = `${idPlayer}-unit-${unitIndex}`
+            document.getElementById(`${idUnit}-health`).innerHTML = `${unit.health}/${initialUnitsHealth} ❤`
+        })
+    })
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trazoned</title>
+    <style>
+    </style>
+  </head>
+  <body>
+      <button id="input-post"> Send Post </button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      var socket = io();
+    
+      var inputPost = document.getElementById('input-post')
+        
+      socket.on('post request', function(msg) {
+        console.log('socket post request: ', msg);
+      })
+
+      inputPost.addEventListener('click', () => {
+        axios.post('/')
+        .then(function (response) {
+          // handle success
+          console.log('response: ', response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+      })
+    </script>
+  </body>
+</html>

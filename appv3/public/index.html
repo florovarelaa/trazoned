@@ -6,32 +6,28 @@
     </style>
   </head>
   <body>
-      <button id="input-post"> Send Post </button>
+    <button id="next-fase-btn"> Next Fase </button>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       var socket = io();
     
-      var inputPost = document.getElementById('input-post')
+      var inputPost = document.getElementById('next-fase-btn')
+
+      inputPost.addEventListener('click', () => {
+        socket.emit('nextFase')
+      })
+
+      socket.emit('newPlayer', "")
         
       socket.on('post request', function(msg) {
         console.log('socket post request: ', msg);
       })
 
-      inputPost.addEventListener('click', () => {
-        axios.post('/')
-        .then(function (response) {
-          // handle success
-          console.log('response: ', response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
+      socket.on('updateConnections', players => {
+        console.log('players: ', players)
       })
+
     </script>
   </body>
 </html>

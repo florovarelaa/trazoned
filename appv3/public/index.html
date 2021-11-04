@@ -1,33 +1,381 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Trazoned</title>
-    <style>
-    </style>
-  </head>
-  <body>
-    <button id="next-fase-btn"> Next Fase </button>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-      var socket = io();
-    
-      var inputPost = document.getElementById('next-fase-btn')
 
-      inputPost.addEventListener('click', () => {
-        socket.emit('nextFase')
+<head>
+  <title>Trazoned</title>
+  <style>
+
+
+body {
+    background-color: #669966;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+/* UI -- START */
+
+
+/* BOARD */
+
+#board {
+  display: flex;
+    flex-direction: column;
+    padding: 2.5px;
+}
+
+#board .board-row {
+  display: flex;
+    flex-direction: row;
+}
+
+.board-cell {
+  display: flex;
+    border: 2.5px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-cell.even {
+    background-color: #FFCC88;
+}
+
+.board-cell.odd {
+    background-color: #FFDD66;
+}
+
+.board-unit-img {
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BOARD - END */
+
+
+/* USER-UI - START */
+
+#ui-user {
+    flex-direction: column;
+    text-transform: bold;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+#ui-players-container {
+    height: 100%;
+    flex-direction: column;
+    font-weight: 600;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.ui-unit {
+    flex-direction: column;
+    padding: 10px;
+}
+
+.ui-unit > button {
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.unit-name {
+    font-size: 24px;
+}
+
+.unit-health {
+    font-size: 20px;
+}
+
+/* UI -- END */
+
+.cd94d3 {
+    background-color: #cd94d3 !important;
+}
+
+.c06582 {
+    background-color: #c06582 !important;
+}
+
+.e7a7bb {
+    background-color: #e7a7bb !important;
+}
+
+.color-9370DB {
+    background-color: #9370DB !important;
+}
+
+.color-800080 {
+    background-color: #800080 !important;
+}
+  </style>
+  
+</head>
+
+<body>
+  <!-- <button id="next-fase-btn"> Next Fase </button> -->
+  <button id="unit-movement-btn"> UnitMovement </button>
+  <div id="board"></div>
+  <div id="ui-players-container"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    let socket = io();
+
+    let socketId
+
+    let game
+    let player
+    let potentialMovementColor = "9370DB"
+    let potentialAbilityColor = "800080"
+    let cellSize = 45
+    let uiBuilt = false
+
+    socket.on('connect', () => {
+      console.log('socket.id: ', socket.id)
+      socketId = socket.id
+    });
+
+    // let nextFaseButtn = document.getElementById('next-fase-btn')
+    // nextFaseButtn.addEventListener('click', () => {
+    //   socket.emit('nextFase')
+    // })
+
+    let unitMovementButton = document.getElementById('unit-movement-btn')
+    unitMovementButton.addEventListener('click', () => {
+      movement = player.movement
+      socket.emit('set-unit-step-movement', {player ,movement})
+    })
+
+    socket.emit('newPlayer', "")
+
+    socket.on('build-ui', game => {
+      if(!uiBuilt) {
+        buildUi(game, player)
+      }
+    })
+
+    socket.on('updateConnections', game => {
+      console.log('game: ', game)
+      let players = game.players
+      player = Object.values(players).filter(player => player.id === socketId)[0]
+    })
+
+    function buildUi(game, player) {
+        uiBuilt = true
+        let { boardSize, players, initialUnitsHealth } = game
+        createBoard(boardSize, cellSize)
+        createPlayerButtons(player, game)
+        drawUnitsOnBoard(players, cellSize)
+        addEventListenersToPlayersButtons(players, boardSize, potentialMovementColor, potentialAbilityColor)
+    }
+
+    function createBoard(boardSize, cellSize) {
+      let board = document.getElementById('board');
+      let cell;
+      let rowContainer;
+
+      for (let i = 0; i < boardSize; i++) {
+
+        rowContainer = document.createElement("div")
+        rowContainer.classList.add('board-row')
+        rowContainer.style.width = `${boardSize * cellSize}px`
+
+        for (let j = 0; j < boardSize; j++) {
+          cell = document.createElement("div");
+
+          cell.style.width = `${cellSize}px`
+          cell.style.height = `${cellSize}px`
+
+          cell.classList.add('board-cell');
+          cell.id = `x${j}y${i}`
+
+          colorBoardCell(cell, i, j);
+
+          rowContainer.appendChild(cell);
+
+        }
+
+        board.appendChild(rowContainer);
+      }
+    }
+
+    function colorBoardCell(cell, i, j) {
+      if ((i + j) % 2 === 0) {
+        cell.classList.add('even')
+      } else {
+        cell.classList.add('odd')
+      }
+    }
+
+    function createPlayerButtons(player, game) {
+
+      let initialUnitsHealth = game.initialUnitsHealth
+
+      let uiPlayersContainer = document.getElementById('ui-players-container')
+
+      // players.forEach((player, playerIndex) => {
+        let idPlayer = `ui-player`
+        let uiPlayer = createUiTag('div', idPlayer, uiPlayersContainer, `ui-player`, ``)
+
+        // let uiPlayer = document.getElementById(idPlayer)
+
+        player.units.forEach((unit, unitIndex) => {
+          let idUnit = `${idPlayer}-unit-${unitIndex}`
+          createUiTag('div', idUnit, uiPlayer, `ui-unit unit-${unitIndex}`, ``)
+          let uiUnit = document.getElementById(idUnit);
+          createUiTag('div', `${idUnit}-name`, uiUnit, 'unit-name', unit.name)
+          createUiTag('div', `${idUnit}-health`, uiUnit, 'unit-health', `${unit.health}/${initialUnitsHealth} ❤`)
+
+          unit.steps.forEach((step, stepIndex) => {
+
+            createUiTag('div', `${idUnit}-step-${stepIndex}-container`, uiUnit, '', `Step: ${stepIndex}`)
+            createUiTag('button', `${idUnit}-step-${stepIndex}-move`, uiUnit, 'unit-button unit-button-movement', 'Move')
+
+            unit.abilities.forEach((ability, abilityIndex) => {
+              createUiTag('button', `${idUnit}-ability-${abilityIndex}-step-${stepIndex}`, uiUnit, `unit-button unit-button-ability-${abilityIndex}`, ability.name)
+            })
+          })
+        })
+      // })
+    }
+
+
+    function createUiTag(tagName, id, parentNode, classes, innerHTML) {
+      let tag = document.createElement(tagName);
+
+      if (id != '') {
+        tag.setAttribute("id", id);
+      }
+
+      innerHTML == false ? '' : tag.innerHTML = innerHTML
+
+      classes = classes.split(' ')
+
+      if (!(classes.length === 1 && classes[0] === "")) {
+        classes.map(c => tag.classList.add(c))
+      }
+
+      parentNode.appendChild(tag)
+
+      return tag
+    }
+
+
+    function addEventListenersToPlayersButtons(players, boardSize, potentialMovementColor, potentialAbilityColor) {
+
+      players = Array.from(players)
+
+      players.forEach((player, playerIndex) => {
+        let playerId = `ui-player`
+        let units = player.units
+        units.forEach((unit, unitIndex) => {
+          unit.steps.forEach((step, stepIndex) => {
+            let moveButtonId = `${playerId}-unit-${unitIndex}-step-${stepIndex}-move`
+            console.log('moveButtonId: ', moveButtonId)
+            let moveButton = document.getElementById(moveButtonId)
+
+            moveButton.addEventListener('click', () => {
+              console.log('clicked')
+              socket.emit('nextFase', socket.id)
+            })
+
+            let unitAbilities = unit.abilities
+            unitAbilities.forEach((ability, abilityIndex) => {
+              let abilityButtonId = `${playerId}-unit-${unitIndex}-ability-${abilityIndex}-step-${stepIndex}`
+              let abilityButton = document.getElementById(abilityButtonId)
+              abilityButton.addEventListener('click', () => abilityBtnFunc(unit, ability, stepIndex, boardSize, potentialAbilityColor))
+            })
+          })
+        })
       })
+    }
 
-      socket.emit('newPlayer', "")
-        
-      socket.on('post request', function(msg) {
-        console.log('socket post request: ', msg);
+    function getUiButtons() {
+      let uiButtons = document.querySelectorAll('.unit-button')
+      return uiButtons
+    }
+
+    function setUiDisabled() {
+      let buttons = getUiButtons();
+      buttons.forEach(button => {
+        button.disabled = true
       })
+    }
 
-      socket.on('updateConnections', players => {
-        console.log('players: ', players)
+    function setUiEnabled() {
+      let buttons = getUiButtons();
+      buttons.forEach(button => {
+        button.disabled = false
       })
+    }
 
-    </script>
-  </body>
+    function drawUnitsOnBoard(players, cellSize) {
+
+      players = Object.values(players)
+      console.log('players ', players)
+
+      players.forEach(player => {
+        player.units.forEach(unit => {
+          drawUnitOnBoard(unit, player.color, cellSize)
+        })
+      })
+    }
+
+    function eraseUnitsOnBoard() {
+      let cellsWithUnits = document.getElementsByClassName('board-unit-img')
+      cellsWithUnits = Array.prototype.slice.call(cellsWithUnits)
+      cellsWithUnits.forEach(element => {
+        element.parentNode.removeChild(element)
+      })
+    }
+
+    function drawUnitOnBoard(unit, color, cellSize) {
+      console.log('socketId: ', socketId)
+      let unitImage = document.createElement('div')
+      unitImage.innerHTML = unit.name;
+      let unitImageDimensions = cellSize - 0.15 * cellSize
+      unitImage.style.width = `${unitImageDimensions}px`
+      unitImage.style.height = `${unitImageDimensions}px`
+      unitImage.style.backgroundColor = color;
+      unitImage.classList.add('board-unit-img')
+      unitImage.style.fontSize = `${0.25 * cellSize}px`
+      //Aca es el arreglo
+      //let cellId = (position.x != undefined && position.y !=undefined ) ? `${position.x}${position.y}` : position
+      let cellId = `x${unit.position.x}y${unit.position.y}`
+      document.getElementById(cellId).appendChild(unitImage)
+    }
+
+    function addColorAvailablePositions(positions, color) {
+      positions.forEach(position => {
+        let cellId = `x${position.position.x}y${position.position.y}`
+        let cellHtmlElementdocument = document.getElementById(cellId)
+        cellHtmlElementdocument.classList.add(`color-${color}`)
+      })
+    }
+
+    function removeColorAvailablePositions(positions, color) {
+      positions.forEach(position => {
+        let cellId = `x${position.position.x}y${position.position.y}`
+        let cellHtmlElementdocument = document.getElementById(cellId)
+        cellHtmlElementdocument.classList.remove(`color-${color}`)
+      })
+    }
+
+    function updateUnitsHealth(players, initialUnitsHealth) {
+      players.forEach((player, playerIndex) => {
+        let idPlayer = `ui-player-${playerIndex}`
+
+        player.units.forEach((unit, unitIndex) => {
+          let idUnit = `${idPlayer}-unit-${unitIndex}`
+          document.getElementById(`${idUnit}-health`).innerHTML = `${unit.health}/${initialUnitsHealth} ❤`
+        })
+      })
+    }
+  </script>
+</body>
+
 </html>

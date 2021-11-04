@@ -1,38 +1,36 @@
-class ioService {
-    constructor() {
-    }
-    onConnection(io, socket, game) {
-        const players = game.players
-
+function onConnection(io, socket, game) {
         console.log("new player trying to connect with id: ", socket.id)
-
-        if (Object.keys(players).length === 0) {
+        if (Object.keys(game.players).length === 0) {
             game.addPlayer(socket.id)
-            console.log('player 1 connected with id: ', socket.id)
-            io.emit('updateConnections', players)
-
-        } else if (Object.keys(players).length === 1) {
+            game.initPlayersUnitsSteps()
+            socket.broadcast.to(socket.id).emit('build-ui', game);
+            console.log('1st player connected with id: ', socket.id)
+            io.emit('updateConnections', game)
+        } else if (Object.keys(game.players).length === 1) {
             game.addPlayer(socket.id)
-            console.log('player 2 connected with id: ', socket.id)
-            console.log('game: ', game)
-            io.emit('updateConnections', players)
-
+            console.log('2nd player connected with id: ', socket.id)
+            game.initPlayersUnitsSteps()
+            io.emit('updateConnections', game);
+            io.emit('build-ui', game)
         } else {
             console.log('Too many players')
             return false;
-
         }
 
-        socket.on('nextFase', () => {
+        socket.on('nextFase', (data) => {
             game.nextFase()
         })
 
-        socket.on('disconnect', () => {
-            delete players[socket.id]
-            console.log("players: ", Object.keys(players).length)
-            io.emit('updateConnections', players)
+        socket.on('set-unit-step-movement', (data) => {
+            let { id_player, id_unit, selectedIndex} = data
+            console.log('set-unit-step-movement ', data)
         })
-    }
+
+        socket.on('disconnect', () => {
+            game.removePlayer(socket.id)
+            console.log('after disconnect: ', game)
+            io.emit('updateConnections', game)
+        })
 }
 
-module.exports = new ioService()
+module.exports = onConnection

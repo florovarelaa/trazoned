@@ -22,7 +22,6 @@ class Game {
           this.players[id_player] = simulatedPlayers.newRandomPlayer()
         }
           this.players[id_player].setId(id_player)
-          simulatedPlayers.toggleLastCreatedPlayer()
       } else if (Object.keys(this.players).length === 1) {
         if (simulatedPlayers.lastPlayerSimulated === 0) {
           this.players[id_player] = simulatedPlayers.newRandomPlayer()
@@ -32,7 +31,6 @@ class Game {
         this.players[id_player].setId(id_player)
         let playerStartingPosition = this.getPlayerStartingPosition()
         this.players[id_player].setStartingPosition(playerStartingPosition)
-        simulatedPlayers.toggleLastCreatedPlayer()
       } else { 
         console.log('Too many players')
         return false;

@@ -1,5 +1,3 @@
-const Movement = require('./Movement')
-const Ability = require('./Ability')
 const Unit = require('./Unit')
 const Player = require('./Player')
 const movements = require('./Instances/movements')
@@ -26,10 +24,6 @@ function simulatedPlayers() {
     },
     this.newPlayer1 = () => {
         return new Player(null, movementPlayer1, unitsPlayer1)
-    },
-    this.lastPlayerSimulated = 0,
-    this.toggleLastCreatedPlayer = () => {
-        this.lastPlayerSimulated === 0 ? this.lastPlayerSimulated = 1 : this.lastPlayerSimulated = 0
     },
     this.newRandomPlayer = () => {
 

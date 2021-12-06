@@ -17,6 +17,9 @@ class Player {
     setStartingPosition = (position) => {
         this.startingPosition = position
     }
+    getStartingPosition = () => {
+        return this.startingPosition
+    }
     hasAliveUnits = () => {
         let aliveUnits = this.units.filter( unit => {
             return unit.isAlive()

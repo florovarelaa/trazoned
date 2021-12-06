@@ -15,19 +15,8 @@ class Game {
       this.winner = null
     }
     addPlayer(id_player) {
-      if(Object.keys(this.players).length === 0) {
-        if (simulatedPlayers.lastPlayerSimulated === 0) {
-          this.players[id_player] = simulatedPlayers.newRandomPlayer()
-        } else {
-          this.players[id_player] = simulatedPlayers.newRandomPlayer()
-        }
-          this.players[id_player].setId(id_player)
-      } else if (Object.keys(this.players).length === 1) {
-        if (simulatedPlayers.lastPlayerSimulated === 0) {
-          this.players[id_player] = simulatedPlayers.newRandomPlayer()
-        } else {
-          this.players[id_player] = simulatedPlayers.newRandomPlayer()
-        }
+      if(Object.keys(this.players).length === 0 || Object.keys(this.players).length === 1 ) {
+        this.players[id_player] = simulatedPlayers.newRandomPlayer()
         this.players[id_player].setId(id_player)
         let playerStartingPosition = this.getPlayerStartingPosition()
         this.players[id_player].setStartingPosition(playerStartingPosition)
@@ -56,15 +45,25 @@ class Game {
     }
     initPlayersUnitsSteps() {
       let players = Object.values(this.players)
-      console.log('players: ', players)
       players.forEach( player => {
         player.units.forEach( unit => {
           unit.initializeSteps(this.numberOfSteps)
         })
       })
     }
+    initPlayersUnitsStartingPositions() {
+      Object.keys(this.players).forEach(player => {
+        this.players[player].units = this.players[player].units.map( (unit, index) => {
+          let position = JSON.parse(JSON.stringify(this.players[player].getStartingPosition()))
+          position.x = position.x + index
+          unit.setPosition(position)
+          console.log('unit: ', unit.name, unit.position)
+          return unit;
+        });
+      })
+    }
     getPlayerStartingPosition() {
-      let playerIndex = Object.values(this.players).length
+      let playerIndex = Object.values(this.players).length - 1
       let startingPosition;
       switch(playerIndex) {
           case 0: {

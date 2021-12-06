@@ -3,13 +3,15 @@ function onConnection(io, socket, game) {
         if (Object.keys(game.players).length === 0) {
             game.addPlayer(socket.id)
             game.initPlayersUnitsSteps()
-            socket.broadcast.to(socket.id).emit('build-ui', game);
             console.log('1st player connected with id: ', socket.id)
             io.emit('updateConnections', game)
+            socket.broadcast.to(socket.id).emit('build-ui', game);
         } else if (Object.keys(game.players).length === 1) {
             game.addPlayer(socket.id)
             console.log('2nd player connected with id: ', socket.id)
             game.initPlayersUnitsSteps()
+            game.initPlayersUnitsStartingPositions()
+            // Object.values(game.players).map( player => {console.log('player: ', player.startingPosition); player.units.map( unit => console.log('unit: ', unit.name, ', ', unit.position))})
             io.emit('updateConnections', game);
             io.emit('build-ui', game)
         } else {

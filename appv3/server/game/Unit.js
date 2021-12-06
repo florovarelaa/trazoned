@@ -19,9 +19,6 @@ class Unit {
     setStartingPosition = (position) => {
         this.startingPosition = position
     }
-    setPositionAsStartingPosition = () => {
-        this.position = this.startingPosition
-    }
     setUnitsMovementsAbilities = (movement) => {
         this.abilities.forEach(ability => {
             if (ability.isMovement && ability.selectPosition == null && ability.affectPositions == null) {

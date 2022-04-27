@@ -116,8 +116,7 @@ body {
 </head>
 
 <body>
-  <!-- <button id="next-fase-btn"> Next Fase </button> -->
-  <button id="unit-movement-btn"> UnitMovement </button>
+  <button id="next-fase-btn"> Next Fase </button>
   <div id="board"></div>
   <div id="ui-players-container"></div>
   <script src="/socket.io/socket.io.js"></script>
@@ -139,15 +138,9 @@ body {
       socketId = socket.id
     });
 
-    // let nextFaseButtn = document.getElementById('next-fase-btn')
-    // nextFaseButtn.addEventListener('click', () => {
-    //   socket.emit('nextFase')
-    // })
-
-    let unitMovementButton = document.getElementById('unit-movement-btn')
-    unitMovementButton.addEventListener('click', () => {
-      movement = player.movement
-      socket.emit('set-unit-step-movement', {player ,movement})
+    let nextFaseButtn = document.getElementById('next-fase-btn')
+    nextFaseButtn.addEventListener('click', () => {
+      socket.emit('nextFase')
     })
 
     socket.emit('newPlayer', "")
@@ -170,7 +163,7 @@ body {
         createBoard(boardSize, cellSize)
         createPlayerButtons(player, game)
         drawUnitsOnBoard(players, cellSize)
-        addEventListenersToPlayersButtons(players, boardSize, potentialMovementColor, potentialAbilityColor)
+        addEventListenersToPlayerButtons(player, boardSize, potentialMovementColor, potentialAbilityColor)
     }
 
     function createBoard(boardSize, cellSize) {
@@ -265,33 +258,41 @@ body {
     }
 
 
-    function addEventListenersToPlayersButtons(players, boardSize, potentialMovementColor, potentialAbilityColor) {
+    function addEventListenersToPlayerButtons(player, boardSize, potentialMovementColor, potentialAbilityColor) {
 
-      players = Array.from(players)
+      let playerId = `ui-player`
+      let units = player.units
 
-      players.forEach((player, playerIndex) => {
-        let playerId = `ui-player`
-        let units = player.units
-        units.forEach((unit, unitIndex) => {
-          unit.steps.forEach((step, stepIndex) => {
-            let moveButtonId = `${playerId}-unit-${unitIndex}-step-${stepIndex}-move`
-            console.log('moveButtonId: ', moveButtonId)
-            let moveButton = document.getElementById(moveButtonId)
+      units.forEach((unit, unitIndex) => {
+        unit.steps.forEach((step, stepIndex) => {
 
-            moveButton.addEventListener('click', () => {
-              console.log('clicked')
-              socket.emit('nextFase', socket.id)
-            })
+          let moveButtonId = `${playerId}-unit-${unitIndex}-step-${stepIndex}-move`
+          let moveButton = document.getElementById(moveButtonId)
+          moveButton.addEventListener('click', () => {
+            setUnitStepMovement(player, unit, stepIndex, boardSize)
+          })
 
-            let unitAbilities = unit.abilities
-            unitAbilities.forEach((ability, abilityIndex) => {
-              let abilityButtonId = `${playerId}-unit-${unitIndex}-ability-${abilityIndex}-step-${stepIndex}`
-              let abilityButton = document.getElementById(abilityButtonId)
-              abilityButton.addEventListener('click', () => abilityBtnFunc(unit, ability, stepIndex, boardSize, potentialAbilityColor))
+          let unitAbilities = unit.abilities
+          unitAbilities.forEach((ability, abilityIndex) => {
+            let abilityButtonId = `${playerId}-unit-${unitIndex}-ability-${abilityIndex}-step-${stepIndex}`
+            let abilityButton = document.getElementById(abilityButtonId)
+            abilityButton.addEventListener('click', () => {
+              setUnitStepAbility(player, unit, ability, stepIndex, boardSize)
             })
           })
         })
       })
+    } 
+
+    function setUnitStepMovement(player, unit, stepIndex, boardSize) {
+      setUiDisabled()
+      console.log('set-unit-step-movement', {player, unit})
+      socket.emit('set-unit-step-movement', {player, unit})
+    }
+    function setUnitStepAbility(player, unit, ability, stepIndex, boardSize) {
+      setUiDisabled()
+      console.log('set-unit-step-ability', {player, unit, ability})
+      socket.emit('set-unit-step-ability', {player, unit, ability})
     }
 
     function getUiButtons() {
@@ -320,7 +321,7 @@ body {
 
       players.forEach(player => {
         player.units.forEach(unit => {
-          drawUnitOnBoard(unit, '#5057a1', cellSize)
+          drawUnitOnBoard(unit, player.color, cellSize)
         })
       })
     }

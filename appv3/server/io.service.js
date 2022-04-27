@@ -19,6 +19,12 @@ function onConnection(io, socket, game) {
             return false;
         }
 
+        socket.on('disconnect', () => {
+            game.removePlayer(socket.id)
+            console.log('after disconnect: ', game)
+            io.emit('updateConnections', game)
+        })
+
         socket.on('nextFase', (data) => {
             game.nextFase()
         })
@@ -27,12 +33,12 @@ function onConnection(io, socket, game) {
             let { id_player, id_unit, selectedIndex} = data
             console.log('set-unit-step-movement ', data)
         })
-
-        socket.on('disconnect', () => {
-            game.removePlayer(socket.id)
-            console.log('after disconnect: ', game)
-            io.emit('updateConnections', game)
+        
+        socket.on('set-unit-step-ability', (data) => {
+            let { id_player, id_unit, selectedIndex} = data
+            console.log('set-unit-step-ability ', data)
         })
+
 }
 
 module.exports = onConnection

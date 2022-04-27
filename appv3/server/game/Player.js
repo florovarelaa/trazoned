@@ -5,6 +5,7 @@ class Player {
         this.movement = movement
         this.units = units
         this.setUnitsPlayerId()
+        this.color = '#b5a5a7'
     }
     setId(id) {
         this.id = id
@@ -29,6 +30,9 @@ class Player {
     }
     resetUnitsSteps = () => {
         this.units.forEach( unit => unit.resetSteps())
+    }
+    setColor = (color) => {
+        this.color = color
     }
 }
 

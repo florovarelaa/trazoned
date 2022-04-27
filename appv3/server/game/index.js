@@ -1,6 +1,11 @@
 const simulatedPlayers = require('./simulatedPlayers')
 const Board = require('./Board')
 
+const playersColors = [
+  '#214dfc',
+  '#fc2145'
+]
+
 class Game {
     constructor(boardSize, numberOfSteps, initialUnitsHealth) {
       this.id = Math.random()
@@ -13,14 +18,22 @@ class Game {
       this.numberOfSteps = numberOfSteps
       this.players = {}
       this.winner = null
+      this.playersColors = playersColors
     }
     addPlayer(id_player) {
-      if(Object.keys(this.players).length === 0 || Object.keys(this.players).length === 1 ) {
-        this.players[id_player] = simulatedPlayers.newRandomPlayer()
-        this.players[id_player].setId(id_player)
-        let playerStartingPosition = this.getPlayerStartingPosition()
-        this.players[id_player].setStartingPosition(playerStartingPosition)
-      } else { 
+        if(Object.keys(this.players).length === 0) {
+          this.players[id_player] = simulatedPlayers.newRandomPlayer()
+          this.players[id_player].setId(id_player)
+          let playerStartingPosition = this.getPlayerStartingPosition()
+          this.players[id_player].setStartingPosition(playerStartingPosition)
+          this.players[id_player].setColor(this.playersColors[0])
+        } else if (Object.keys(this.players).length === 1) {
+          this.players[id_player] = simulatedPlayers.newRandomPlayer()
+          this.players[id_player].setId(id_player)
+          let playerStartingPosition = this.getPlayerStartingPosition()
+          this.players[id_player].setStartingPosition(playerStartingPosition)
+          this.players[id_player].setColor(this.playersColors[1])
+        } else { 
         console.log('Too many players')
         return false;
       }

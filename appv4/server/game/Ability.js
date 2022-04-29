@@ -1,13 +1,84 @@
+// keywords - all that affects the step of the casting unit
+
+//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid', ]
+
+
+// targetEffects
+
+    // This ability when fast will
+    //     deal 10 damage to all enemies in the selected area
+    //     give the keyword sustain to for 2 damage and 4 turns on all enemies in the selected area
+    //     give the keyword fast to all enemies in the selected area
+    //     give the keyword fast to the player using the card
+    //     give the keyword sustain for 1 heal and 3 turns to the player using the card
+    //     give the keyword sustain for 3 heal and 2 turns to all allies in the selected area
+
+    // Ability.targetEffects = [
+    //     {   
+    //         keyword: 'damage',
+    //         target: 'enemy',
+    //         value: 10
+    //     },
+    //     {   
+    //         keyword: 'heal',
+    //         target: 'caster',
+    //         value: 10
+    //     },
+    //     {
+    //         keyword: 'sustain',
+    //         target: 'enemy',
+    //         type: 'damage',
+    //         value: 2,
+    //         turns: 4,
+    //     },
+    //     {
+    //         keyword: 'fast',
+    //         target: 'enemy',
+    //     },
+    //     {
+    //         keyword: 'fast',
+    //         target: 'caster'
+    //     },
+    //     {
+    //         keyword: 'sustain',
+    //         target: 'caster',
+    //         type: 'heal',
+    //         value: 2,
+    //         turns: 3,
+    //     },
+    //     {
+    //         keyword: 'sustain',
+    //         target: 'ally',
+    //         type: 'heal',
+    //         value: 3,
+    //         turns: 2,
+    //     },
+    //     { 
+        //     keyword: 'move',
+        //     target: 'caster | enemy | ally',
+        //     direction: 'cellSelected | opposite',
+        //     cells: 1 | 2 | 2
+    //     }
+    // ]
+
+
+// id
+// name
+// selectPositions - las posiciones que se pueden elegir al usar esta carta. son genericas y despues dependera de la posicion de la unidad.
+// affectPositions - las posiciones que afecta la carta cuando es ejecutada.
+// text
+// keywords - los effectos que se aplican al jugador que usa la carta
+// targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
+
 class Ability {
-    constructor(id, name, selectPositions, affectPositions, isMovement, damage, text, keywords, casterEffect, targetEffect) {
+    constructor(id, name, selectPositions, affectPositions, text, keywords, targetEffects) {
         this.id = id
         this.name = name
         this.selectPositions = selectPositions
         this.affectPositions = affectPositions
-        this.isMovement = isMovement 
-        this.damage = damage
         this.text = text
         this.keywords = keywords
+        this.targetEffects = targetEffects
     }
     setSelectPosition = (selectPosition) => {
         this.selectPosition = selectPosition
@@ -18,37 +89,3 @@ class Ability {
 }
 
 module.exports = Ability
-
-const effectExample = {
-    damage: 10,
-    heal: 10,
-    exhaust: {
-        target: 'enemy'
-    },
-    cast: {
-        target: 'unit'
-    },
-    stun: {
-        target: 'enemy'
-    },
-    sustains: {
-        0: {
-            affected: 'area',
-            turns: 2,
-            type: 'heal',
-            value: 10
-        },
-        1: {
-            affected: 'unit',
-            target: 'enemy',
-            turns: 2,
-            type: 'damage',
-            value: 3
-        }
-    },
-    fast: false,
-    slow: true,
-    fistly: true,
-    secondly: false,
-    hybrid: true
-}

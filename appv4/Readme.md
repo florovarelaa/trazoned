@@ -14,7 +14,7 @@ MVP a desarrollar.
         - efecto de la celda. si se desplaza por viento cuenta la posicion final.
         - habilidades
         - efecto de habilidades
-        - sustains
+        - sustain
         - verificacion de muerte. Hasta este entonces todo esta "vivo" puede tener vida negativa y que sea curado.
        
 - 1 mapa, 40x40, algunas de las casillas tienen efectos:
@@ -104,7 +104,7 @@ Game Arquitecture
                 - mapEffect
                     - type: enum
                     - value: number
-                - sustains:
+                - sustain:
                     - type: enum
                     - value: number
                     - remainingTurns: number
@@ -147,7 +147,7 @@ PlayerController
     - targeted: boolean
     - isMovement: boolean
     - keyword: enum
-    - sustains: {
+    - sustain: {
         type: enum
         value: number
         turns : number
@@ -170,13 +170,10 @@ loot, pickable, dropable, consumable, wearable
             Exhaust.
                 Bloquea el siguiente movimiento de la unidad seleccionada.
             
-            Cast
+            Silence
                 Bloquea la siguiente habilidad.
 
-            Stun
-                Bloquea el siguiente movimiento y habilidad de la unidad seleccionada.
-
-            Sustains(X)
+            Sustain(X)
                 Se mantiene en la unidad o el area (X) turnos. 0 indica hasta el final del turno.
 
             Fast

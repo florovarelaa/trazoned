@@ -7,20 +7,11 @@ class Unit {
         this.playerId = playerId
         this.name = name
         this.health = unitsInitialHealth
-        this.position = position
-        this.startingPosition = position
-        this.abilities = abilities
-        this.steps = []
-        this.collided = false
+        this.basicAbility1 = abilities[0]
+        this.basicAbility2 = abilities[1]
     }
     setPlayerId = (playerId) => {
         this.playerId = playerId
-    }
-    setPosition = (position) => {
-        this.position = position
-    }
-    setStartingPosition = (position) => {
-        this.startingPosition = position
     }
     setUnitsMovementsAbilities = (movement) => {
         this.abilities.forEach(ability => {

@@ -10,6 +10,11 @@ class Player {
         this.inventory = new Inventory(inventorySize)
         this.color
         this.startingPosition
+        this.position
+        this.currentCards
+        this.currentMovements
+        this.availableCardSlots
+        this.wishedTurn = new Turn()
     }
     setColor(color) {
         this.color = color

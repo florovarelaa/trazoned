@@ -8,6 +8,7 @@ class Player {
         this.deck = deck
         this.movements = movements
         this.inventory = new Inventory(inventorySize)
+        this.health = unitsInitialHealth
         this.color
         this.startingPosition
         this.position
@@ -28,7 +29,7 @@ class Player {
     getStartingPosition = () => {
         return this.startingPosition
     }
-    hasAliveUnits = () => {
+    isAlive = () => {
         return this.unit.isAlive()
     }
     getUnit = () => {

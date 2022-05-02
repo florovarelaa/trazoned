@@ -80,12 +80,6 @@ class Ability {
         this.keywords = keywords
         this.targetEffects = targetEffects
     }
-    setSelectPosition = (selectPosition) => {
-        this.selectPosition = selectPosition
-    }
-    setAffectPositions = (affectPositions) => {
-        this.affectPositions = affectPositions
-    }
 }
 
 module.exports = Ability

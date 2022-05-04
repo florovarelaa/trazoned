@@ -104,7 +104,7 @@ const shapeRhombus = new Shape(
     ]
 )
 
-const shapes = {
+const SHAPES = {
     cells1King: cells1King,
     cells2Knight: cells2Knight,
     cells2InvertedKnight: cells2InvertedKnight,
@@ -115,4 +115,4 @@ const shapes = {
     rhombus: shapeRhombus,
 }
 
-module.exports = shapes;
+module.exports = SHAPES;

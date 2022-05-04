@@ -1,17 +1,19 @@
 // keywords - all that affects the step of the casting unit
 
-//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid', ]
+//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid', 'Movement']
 
 
 // targetEffects
 
     // This ability when fast will
     //     deal 10 damage to all enemies in the selected area
+    //     heal 10 damage to the player unsing the card
     //     give the keyword sustain to for 2 damage and 4 turns on all enemies in the selected area
     //     give the keyword fast to all enemies in the selected area
     //     give the keyword fast to the player using the card
     //     give the keyword sustain for 1 heal and 3 turns to the player using the card
     //     give the keyword sustain for 3 heal and 2 turns to all allies in the selected area
+    //     move the target a distance from the player casting unit cell
 
     // Ability.targetEffects = [
     //     {   

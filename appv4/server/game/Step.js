@@ -4,3 +4,5 @@ class Step {
         this.ability = undefined
     }
 }
+
+module.exports = Step

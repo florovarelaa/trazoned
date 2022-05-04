@@ -1,5 +1,5 @@
-const Ability = require('../Ability')
-const movements = require('./shapes')
+const Ability = require('../../Ability')
+const SHAPES = require('../shapes/shapes')
 
 // ints correspond to position in a grid where the player is at the center. So it's top cell would be in (X = -abilitySize/2, Y = abilitysize/2)
 // the array corresponds of affected tiles where the selected tile is at [0,0]
@@ -37,11 +37,11 @@ const ability_archer_0_affected_positions = {
 }
 
 const ability_warrior_0 = new Ability(
-    0, 'warrior_first', movements.king, ability_warrior_0_affected_positions, false, 3, 'deal damage in a cone'
+    0, 'warrior_first', SHAPES.king, ability_warrior_0_affected_positions, false, 3, 'deal damage in a cone'
 )
 
 const ability_mage_0 = new Ability(
-    1, 'mage_first', movements.king, ability_mage_0_affected_positions, false, 3, 'deal damage in a line'
+    1, 'mage_first', SHAPES.king, ability_mage_0_affected_positions, false, 3, 'deal damage in a line'
 )
 
 const ability_warrior_1 = new Ability(
@@ -49,15 +49,15 @@ const ability_warrior_1 = new Ability(
 )
 
 const ability_mage_1 = new Ability(
-    2, 'mage_second', movements.king, movements.king, true, null, 'move 1 position'
+    2, 'mage_second', SHAPES.king, SHAPES.king, true, null, 'move 1 position'
 )
 
 const ability_archer_0 = new Ability(
-    0, 'archer_first', movements.king, ability_archer_0_affected_positions, false, 3, 'deal damage in a distant cone'
+    0, 'archer_first', SHAPES.king, ability_archer_0_affected_positions, false, 3, 'deal damage in a distant cone'
 )
 
 const ability_archer_1 = new Ability(
-    0, 'archer_second', movements.rhombus, ability_archer_0_affected_positions, true, null, 'move in a rhombus shape'
+    0, 'archer_second', SHAPES.rhombus, ability_archer_0_affected_positions, true, null, 'move in a rhombus shape'
 )
 
 const abilities = {

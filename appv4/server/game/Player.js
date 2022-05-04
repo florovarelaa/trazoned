@@ -1,5 +1,7 @@
-const constants = require('./constants')
-const { inventorySize } = constants;
+const Inventory = require('./Inventory');
+const Turn = require('./Turn');
+const constants = require('./constants');
+const { inventorySize, unitsInitialHealth } = constants;
 
 class Player {
     constructor(id, deck, movements) {

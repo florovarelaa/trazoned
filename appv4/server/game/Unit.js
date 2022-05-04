@@ -1,10 +1,9 @@
 class Unit {
-    constructor(name, abilities) {
-        this.id = Math.random() * 100
-        this.playerId = playerId
+    constructor(name, basicAbilities) {
+        this.id
         this.name = name
-        this.basicAbility1 = abilities[0]
-        this.basicAbility2 = abilities[1]
+        this.basicAbility1 = basicAbilities[0]
+        this.basicAbility2 = basicAbilities[1]
     }
     setPlayerId = (playerId) => {
         this.playerId = playerId

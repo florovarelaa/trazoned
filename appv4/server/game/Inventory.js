@@ -3,3 +3,5 @@ class Inventory {
         this.items = Array(inventorySize).fill(null)
     }
 }
+
+module.exports = Inventory;

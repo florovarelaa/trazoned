@@ -1,7 +1,7 @@
 const Map = require('./Map.js')
 const MapState = require('./MapState.js')
 const constants = require('./constants');
-const simulatedPlayers = require('./simulatedPlayers')
+const simulatedPlayers = require('./Instances/players/simulatedPlayers')
 
 const { mapSize } = constants;
 

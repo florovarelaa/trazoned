@@ -73,11 +73,10 @@
 // targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
 
 class Ability {
-    constructor(id, name, selectPositions, affectPositions, text, keywords, targetEffects) {
+    constructor(id, name, positions, text, keywords, targetEffects) {
         this.id = id
         this.name = name
-        this.selectPositions = selectPositions
-        this.affectPositions = affectPositions
+        this.positions = positions
         this.text = text
         this.keywords = keywords
         this.targetEffects = targetEffects

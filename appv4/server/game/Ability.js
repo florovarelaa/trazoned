@@ -1,6 +1,6 @@
 // keywords - all that affects the step of the casting unit
 
-//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid', 'Movement']
+//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid']
 
 
 // targetEffects
@@ -27,9 +27,9 @@
     //         value: 10
     //     },
     //     {
-    //         keyword: 'sustain',
+    //         keyword: 'damage',
     //         target: 'enemy',
-    //         type: 'damage',
+    //         sustain: 'true',
     //         value: 2,
     //         turns: 4,
     //     },
@@ -42,16 +42,16 @@
     //         target: 'caster'
     //     },
     //     {
-    //         keyword: 'sustain',
+    //         keyword: 'heal',
     //         target: 'caster',
-    //         type: 'heal',
+    //         sustain: true,
     //         value: 2,
     //         turns: 3,
     //     },
     //     {
-    //         keyword: 'sustain',
+    //         keyword: 'heal',
     //         target: 'ally',
-    //         type: 'heal',
+    //         sustain: true,
     //         value: 3,
     //         turns: 2,
     //     },
@@ -60,7 +60,12 @@
         //     target: 'caster | enemy | ally',
         //     direction: 'cellSelected | opposite',
         //     cells: 1 | 2 | 2
-    //     }
+    //     },
+    // {
+    //     keyword: 'move',
+    //     target: 'caster',
+    //     position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position
+    // }
     // ]
 
 
@@ -71,7 +76,6 @@
 // text
 // keywords - los effectos que se aplican al jugador que usa la carta
 // targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
-
 class Ability {
     constructor(id, name, positions, text, keywords, targetEffects) {
         this.id = id
@@ -80,6 +84,24 @@ class Ability {
         this.text = text
         this.keywords = keywords
         this.targetEffects = targetEffects
+    }
+    setPlayer(player) {
+        this.player = player
+    }
+    getPlayer() {
+        return this.player
+    }
+    setPositions(positions) {
+        this.positions = positions
+    }
+    getPositions() {
+        return this.positions
+    }
+    setSelectedCell(x, y) {
+        this.selectedCell = {
+            x,
+            y
+        }
     }
 }
 

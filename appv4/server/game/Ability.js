@@ -1,7 +1,6 @@
 // keywords - all that affects the step of the casting unit
 
-//      Abilitiy.keywords = ['Exhaust', 'Silence', 'Fast', 'Slow', 'Firstly', 'Secondly', 'Hybrid']
-
+//      Ability.keywords = ['exhaust', 'silence', 'fast', 'slow', 'firstly', 'secondly', 'hybrid']
 
 // targetEffects
 
@@ -56,16 +55,16 @@
     //         turns: 2,
     //     },
     //     { 
-        //     keyword: 'move',
-        //     target: 'caster | enemy | ally',
-        //     direction: 'cellSelected | opposite',
-        //     cells: 1 | 2 | 2
+    //          keyword: 'move',
+    //          target: 'caster | enemy | ally',
+    //          direction: 'cellSelected | opposite',
+    //          cells: 1 | 2 | 2
     //     },
-    // {
-    //     keyword: 'move',
-    //     target: 'caster',
-    //     position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position
-    // }
+    //     {
+    //          keyword: 'move',
+    //          target: 'caster',
+    //          position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position
+    //     }
     // ]
 
 

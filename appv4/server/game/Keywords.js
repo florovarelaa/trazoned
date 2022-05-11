@@ -1,4 +1,5 @@
 const keywords = {
+    // used for the unit casting the ability
     caster: {
         exhaust: 'exhaust',
         silence: 'silence',
@@ -12,6 +13,7 @@ const keywords = {
         token_c: 'token_c',
         token_d: 'token_d',
     },
+    // used for the ability target effect
     effect: {
         damage: 'damage',
         heal: 'heal',
@@ -25,6 +27,7 @@ const keywords = {
         firstly: 'firstly',
         secondly: 'secondly',
     },
+    // used for the ability target
     target: {
         caster: 'caster',
         enemy: 'enemy',

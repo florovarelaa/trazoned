@@ -127,7 +127,7 @@ const SHAPES = {
     movement_2_cross,
     movement_2_rhombus,
     movement_3_straight,
-    movement_3cross,
+    movement_3_cross,
 }
 
 module.exports = SHAPES;

@@ -2,6 +2,8 @@ const Ability = require('../Ability')
 const keywords = require('../../Keywords')
 const SHAPES = require('../shapes/shapes')
 
+// keys correspond to position in a grid where the player is at the center [0,0].
+// the array corresponds of affected tiles when the cell corresponding to the key is selected as target.
 const ability_mage_0_positions = {
  '-3_3': ['-4_4','-3_4','-4_3','-3_3'],       
  '0_3': ['0_4','-1_3','0_3','1_3'],       

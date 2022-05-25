@@ -31,14 +31,14 @@ class Game {
             player.setStartingPosition(playersCells[index])
             const position = playersCells[index]
             const positionKey = `${position.x}_${position.y}`
-            mapState.players[positionKey] = player.id
+            mapState.players[player.id] = positionKey
         })
         
         const npcCells = this.map.getNpcCells(this.players.length)
         npcCells.forEach( (cell, index) => {
             const position = cell
             const positionKey = `${position.x}_${position.y}`
-            mapState.npcs[positionKey] = this.players.length + 1 + index
+            mapState.npcs[this.players.length + 1 + index] = positionKey
         })
         
         const initialMapState = new MapState(mapState)

@@ -4,7 +4,7 @@ class MapState {
 
         // this.state = {
         //     players: {
-        //         // '3_7': 1 // unitId
+        //         // 'unitId': x_y
         //     },
         //     areas: {
         //         // '2_8': new MapTile()

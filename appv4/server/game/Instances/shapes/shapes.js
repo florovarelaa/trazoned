@@ -2,7 +2,7 @@ const Shape = require('../../Shape')
 
 // --- 1 ---
 
-const movement_1_king = new Shape(
+const _1_king = new Shape(
     {
         '-1_1': ['-1_1'],       
         '0_1': ['0_1'],       
@@ -17,7 +17,7 @@ const movement_1_king = new Shape(
 
 // --- 2 ---
 
-const movement_2_knight = new Shape(
+const _2_knight = new Shape(
     {
         '-1_2': ['-1_2'],       
         '1_2': ['1_2'],       
@@ -30,7 +30,7 @@ const movement_2_knight = new Shape(
     }
 )
 
-const movement_2_invertedKnight = new Shape(
+const _2_invertedKnight = new Shape(
     {
         '-2_2': ['-2_2'],       
         '0_2': ['0_2'],       
@@ -43,7 +43,7 @@ const movement_2_invertedKnight = new Shape(
     }
 )
   
-const movement_2_straight = new Shape(
+const _2_straight = new Shape(
     {
         '0_2': ['0_2'],       
         '0_1': ['0_1'],       
@@ -56,7 +56,7 @@ const movement_2_straight = new Shape(
     }
 )
   
-const movement_2_cross = new Shape(
+const _2_cross = new Shape(
     {
         '-2_2': ['-2_2'],       
         '-1_1': ['-1_1'],       
@@ -70,7 +70,7 @@ const movement_2_cross = new Shape(
 )
 
 
-const movement_2_rhombus = new Shape(
+const _2_rhombus = new Shape(
     {
         '0_2': ['0_2'], 
         '-1_1': ['-1_1'], 
@@ -85,7 +85,7 @@ const movement_2_rhombus = new Shape(
 
 // --- 3 ---
   
-const movement_3_straight = new Shape(
+const _3_straight = new Shape(
     {
         '0_3': ['0_3'],       
         '0_2': ['0_2'],       
@@ -102,7 +102,7 @@ const movement_3_straight = new Shape(
     }
 )
 
-const movement_3_cross = new Shape(
+const _3_cross = new Shape(
     {
         '-3_3': ['-3_3'], 
         '-2_2': ['-2_2'], 
@@ -120,14 +120,14 @@ const movement_3_cross = new Shape(
 )
 
 const SHAPES = {
-    movement_1_king,
-    movement_2_knight,
-    movement_2_invertedKnight,
-    movement_2_straight,
-    movement_2_cross,
-    movement_2_rhombus,
-    movement_3_straight,
-    movement_3_cross,
+    _1_king,
+    _2_straight,
+    _2_cross,
+    _2_rhombus,
+    _2_knight,
+    _2_invertedKnight,
+    _3_straight,
+    _3_cross,
 }
 
 module.exports = SHAPES;

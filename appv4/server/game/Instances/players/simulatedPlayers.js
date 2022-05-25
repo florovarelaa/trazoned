@@ -6,47 +6,31 @@ const abilities = require('../abilities/abilities')
 
 const player1Movements =
 {
-    1: SHAPES.cells1King,
-    2: SHAPES.cells2Cross,
-    3: SHAPES.cells2Knight,
-    4: SHAPES.cells3Straight
+    1: SHAPES._1_king,
+    2: SHAPES._2_cross,
+    3: SHAPES._2_knight,
+    4: SHAPES._3_straight
 }
 
 const player2Movements =
 {
-    1: SHAPES.cells1King,
-    2: SHAPES.cells2Straight,
-    3: SHAPES.cells2Knight,
-    4: SHAPES.cells3Cross
+    1: SHAPES._1_king,
+    2: SHAPES._2_straight,
+    3: SHAPES._2_invertedKnightght,
+    4: SHAPES._3_cross
 }
+let mage = new Unit('mage', abilities.mage_abilities)
+let warrior = new Unit('warrior', abilities.warrior_abilities)
 
-let warriorAbilities = [abilities.ability_warrior_0, abilities.ability_warrior_1]
-let mageAbilities = [abilities.ability_mage_0, abilities.ability_mage_1]
-let archerAbilities = [abilities.ability_archer_0, abilities.ability_archer_1]
-
-// let firstPlayer_warrior = new Unit(0, null, 'Warrior0', 10, null, warriorAbilities, null)
-// let firstPlayer_mage = new Unit(1, null, 'Mage0', 10, null, mageAbilities, null)
-// let secondPlayer_warrior = new Unit(2, null, 'Warrior1', 10, null, warriorAbilities, null)
-// let secondPlayer_mage = new Unit(3, null, 'Mage1', 10, null, mageAbilities, null)
-
-// let unitsPlayer0 = [firstPlayer_warrior, firstPlayer_mage]
-// let unitsPlayer1 = [secondPlayer_warrior, secondPlayer_mage]
-
-let movementsPlayer0 = SHAPES.king
-let movementsPlayer1 = SHAPES.invertedKnight
-
-const deckPlayer0 = {}
-const unitPlayer0 = {}
-
-const deckPlayer1 = {}
-const unitPlayer1 = {}
+const deckPlayer1 = new Deck(warrior)
+const deckPlayer2 = new Deck(mage)
 
 function simulatedPlayers() {
     this.newPlayer0 = () => {
-        return new Player(null, deckPlayer0, unitPlayer0, movementsPlayer0)
+        return new Player(1, deckPlayer1, player1Movements)
     },
     this.newPlayer1 = () => {
-        return new Player(null, deckPlayer1, unitPlayer1, movementsPlayer1)
+        return new Player(2, deckPlayer2, player2Movements)
     },
     this.newRandomPlayer = () => {
 
@@ -68,8 +52,6 @@ function simulatedPlayers() {
             if (!playerFirstUnit) {
 
                 let selectedUnitIndex = getRandomInt(numberOfAvailableUnitsForPlayers)
-                console.log('selectedUnitIndex: ', selectedUnitIndex)
-
                 switch (selectedUnitIndex) {
                     case 0:
                         playerFirstUnit = new Unit(0, null, 'Warrior', unitInitialHealth, null, warriorAbilities, null)

@@ -32,7 +32,7 @@ class Player {
         return this.startingPosition
     }
     isAlive = () => {
-        return this.unit.isAlive()
+        return this.health > 0 
     }
     getUnit = () => {
         return this.unit

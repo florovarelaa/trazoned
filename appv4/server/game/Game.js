@@ -14,8 +14,6 @@ class Game {
     }
     init() {
         console.log('Game initializing')
-        console.log(this.map.playersCells)
-
         const player0 = simulatedPlayers.newPlayer0()
         const player1 = simulatedPlayers.newPlayer1()
 
@@ -32,11 +30,10 @@ class Game {
         this.players.forEach( (player, index) => {
             player.startingPosition = playersCells[index]
         })
-
-        console.log('this.players: ', this.players)
         const startingMapState = new MapState(this.map, this.players)
         this.mapState.push(startingMapState)
-        console.log(this.mapState[this.mapState.length - 1].getMapState())
+        // console.log(this.mapState[this.mapState.length - 1].getMapState())
+        // console.log('this.players:', this.players)
     }
 }
 

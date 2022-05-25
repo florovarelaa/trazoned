@@ -63,7 +63,8 @@
     //     {
     //          keyword: 'move',
     //          target: 'caster',
-    //          position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position
+    //          position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position,
+    //          collision: boolean
     //     }
     // ]
 

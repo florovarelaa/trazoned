@@ -1,4 +1,4 @@
-const constants = {
+const configuration = {
     playersColors: {
         0: '#214dfc',
         1: '#fc2145',
@@ -10,4 +10,4 @@ const constants = {
     deckSize: 7
 }
 
-module.exports = constants;
+module.exports = configuration;

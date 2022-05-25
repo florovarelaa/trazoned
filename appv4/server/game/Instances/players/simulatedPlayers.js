@@ -16,7 +16,7 @@ const player2Movements =
 {
     1: SHAPES._1_king,
     2: SHAPES._2_straight,
-    3: SHAPES._2_invertedKnightght,
+    3: SHAPES._2_invertedKnight,
     4: SHAPES._3_cross
 }
 let mage = new Unit('mage', abilities.mage_abilities)

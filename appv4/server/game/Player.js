@@ -1,10 +1,10 @@
 const Inventory = require('./Inventory');
 const Turn = require('./Turn');
-const constants = require('./constants');
-const { inventorySize, unitsInitialHealth } = constants;
+const configuration = require('./configuration');
+const { inventorySize, unitsInitialHealth } = configuration;
 
 class Player {
-    constructor(id, deck, movements) {
+    constructor(id, deck, movements, availableCardSlots = 0) {
         this.id = id
         this.unit = deck.unit
         this.deck = deck
@@ -16,9 +16,13 @@ class Player {
         this.position
         this.currentCards
         this.currentMovements
-        this.availableCardSlots
-        this.turnHistory
-        this.wishedTurn = new Turn()
+        this.availableCardSlots = availableCardSlots
+        this.turnHistory = []
+        this.currentTurn = new Turn()
+        this.abilities = {
+            basicAbility1: deck.unit.basicAbility1,
+            basicAbility2: deck.unit.basicAbility2
+        }
     }
     setColor(color) {
         this.color = color
@@ -38,10 +42,6 @@ class Player {
     setPosition = (position) => {
         this.position = position
     }
-    setStartingPosition = (position) => {
-        this.startingPosition = position
-    }
-     
 }
 
 module.exports = Player;

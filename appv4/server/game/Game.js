@@ -1,6 +1,8 @@
 const Map = require('./Map.js')
 const MapState = require('./MapState.js')
-const constants = require('./constants');
+const FaseService = require('./Fase.service')
+const MovementService = require('./Movement.service')
+const constants = require('./configuration');
 const simulatedPlayers = require('./Instances/players/simulatedPlayers')
 
 const { mapSize } = constants;
@@ -28,7 +30,7 @@ class Game {
 
         const playersCells = this.map.getPlayersStartingCells(this.players.length)
         this.players.forEach( (player, index) => {
-            player.setStartingPosition(playersCells[index])
+            player.setPosition(playersCells[index])
             const position = playersCells[index]
             const positionKey = `${position.x}_${position.y}`
             mapState.players[player.id] = positionKey
@@ -43,6 +45,7 @@ class Game {
         
         const initialMapState = new MapState(mapState)
         this.mapStates.push(initialMapState)
+        //broadcast to players their positions, once they are ready continue
         this.start()
     }
     addPlayer(player) {
@@ -50,8 +53,9 @@ class Game {
     }
     start() {
         console.log('game starting')
-        console.log('mapState: ', this.mapStates[this.mapStates.length-1])
-        
+        const initialMapState = this.mapStates[0]
+        console.log('initialMapState: ', initialMapState)
+        FaseService.startFirstFase(this.mapStates.length);
         // console.log(this.mapState[this.mapState.length - 1].getMapState())
         // console.log('this.players:', this.players)
     }

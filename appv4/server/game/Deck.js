@@ -1,4 +1,4 @@
-const constants = require('./constants')
+const constants = require('./configuration')
 const { deckSize } = constants
 
 class Deck {

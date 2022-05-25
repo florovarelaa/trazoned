@@ -1,19 +1,19 @@
 class MapTile {
     //     {
-    //          keyword: 'area',
-    //          effect: {
-    //              keyword: 'damage'
-    //              target: 'all',
-    //              value: 5
-    //              sustain: true,
-    //              turns: 2,
-    //          }
-    //          turns: 3,
+//          keyword: 'area',
+//          effect: {
+//              keyword: 'damage'
+//              target: 'all',
+//              value: 5
+//              sustain: true,
+//              turns: 2,
+//          }
+//          turns: 3,
     //     },
     //     {
-    //          keyword: 'areaBlock',
-    //          target: all | ally | enemy,
-    //          turns: 3,
+//          keyword: 'areaBlock',
+//          target: all | ally | enemy,
+//          turns: 3,
     //     },
     constructor() {
 
@@ -75,8 +75,8 @@ class Map {
     getBossCells() {
         return this.bossCells
     }
-    getNpcCells() {
-        return this.npcCells
+    getNpcCells(numberOfPlayers) {
+        return this.npcCells.slice(0, numberOfPlayers);
     }
 }
 

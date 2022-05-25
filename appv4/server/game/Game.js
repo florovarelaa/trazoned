@@ -9,7 +9,7 @@ class Game {
     constructor() {
         this.map = new Map(mapSize);
         this.players = [];
-        this.mapState = [];
+        this.mapStates = [];
         this.fase = 0;
     }
     init() {
@@ -20,14 +20,29 @@ class Game {
         this.addPlayer(player0)
         this.addPlayer(player1)
 
+        const mapState = {
+            players: {},
+            areas: this.map.areas,
+            npcs: {}
+        }
+
         const playersCells = this.map.getPlayersStartingCells(this.players.length)
         this.players.forEach( (player, index) => {
-            player.startingPosition = playersCells[index]
+            player.setStartingPosition(playersCells[index])
+            const position = playersCells[index]
+            const positionKey = `${position.x}_${position.y}`
+            mapState.players[positionKey] = player.id
         })
-
-        const initialMapState = new MapState(this.map)
-        initialMapState.setPlayers(this.players)
-        this.mapState.push(initialMapState)
+        
+        const npcCells = this.map.getNpcCells(this.players.length)
+        npcCells.forEach( (cell, index) => {
+            const position = cell
+            const positionKey = `${position.x}_${position.y}`
+            mapState.npcs[positionKey] = this.players.length + 1 + index
+        })
+        
+        const initialMapState = new MapState(mapState)
+        this.mapStates.push(initialMapState)
         this.start()
     }
     addPlayer(player) {
@@ -35,7 +50,7 @@ class Game {
     }
     start() {
         console.log('game starting')
-        console.log('mapState: ', this.mapState[this.mapState.length-1])
+        console.log('mapState: ', this.mapStates[this.mapStates.length-1])
         
         // console.log(this.mapState[this.mapState.length - 1].getMapState())
         // console.log('this.players:', this.players)

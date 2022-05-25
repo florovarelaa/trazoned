@@ -38,6 +38,9 @@ class Player {
     setPosition = (position) => {
         this.position = position
     }
+    setStartingPosition = (position) => {
+        this.startingPosition = position
+    }
      
 }
 

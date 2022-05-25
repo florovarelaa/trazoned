@@ -1,9 +1,32 @@
+class MapTile {
+    //     {
+    //          keyword: 'area',
+    //          effect: {
+    //              keyword: 'damage'
+    //              target: 'all',
+    //              value: 5
+    //              sustain: true,
+    //              turns: 2,
+    //          }
+    //          turns: 3,
+    //     },
+    //     {
+    //          keyword: 'areaBlock',
+    //          target: all | ally | enemy,
+    //          turns: 3,
+    //     },
+    constructor() {
+
+    }
+}
+
 class Map {
     constructor(mapSize) {
-        // TODO
-        // the actual board should be set here.
-        // data is in the configuration file.
-        this.state = new Array(mapSize).fill(null).map(() => new Array(mapSize).fill(null));
+        this.areas = {
+            // TODO
+            // this is the state of the map, blocked tiles, wind tiles, sustain tiles.
+            // '2_8': new MapTile()
+        }
         this.mapSize = mapSize;
         this.playersCells = [
             {
@@ -14,14 +37,14 @@ class Map {
                 x: Math.floor(this.mapSize/2),
                 y: this.mapSize - 1
             },
-            // {
-            //     x: 0,
-            //     y: Math.floor(this.mapSize/2)
-            // },
-            // {
-            //     x: this.mapSize - 1,
-            //     y: Math.floor(this.mapSize/2)
-            // },
+            {
+                x: 0,
+                y: Math.floor(this.mapSize/2)
+            },
+            {
+                x: this.mapSize - 1,
+                y: Math.floor(this.mapSize/2)
+            },
         ];
         this.bossCells = [{
             x: Math.floor(this.mapSize/2),
@@ -46,8 +69,8 @@ class Map {
             },
         ]
     }
-    getPlayersCells() {
-        return this.playersCells
+    getPlayersStartingCells(numberOfPlayers) {
+        return this.playersCells.slice(0, numberOfPlayers);
     }
     getBossCells() {
         return this.bossCells

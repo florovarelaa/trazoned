@@ -17,19 +17,11 @@ class Player {
         this.currentCards
         this.currentMovements
         this.availableCardSlots
+        this.turnHistory
         this.wishedTurn = new Turn()
     }
     setColor(color) {
         this.color = color
-    }
-    setUnitsPlayerId() {
-        this.unit.setPlayerId(this.id)
-    }
-    setStartingPosition = (position) => {
-        this.startingPosition = position
-    }
-    getStartingPosition = () => {
-        return this.startingPosition
     }
     isAlive = () => {
         return this.health > 0 
@@ -43,6 +35,10 @@ class Player {
     getDeck = () => {
         return this.deck
     }
+    setPosition = (position) => {
+        this.position = position
+    }
+     
 }
 
 module.exports = Player;

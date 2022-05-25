@@ -26,7 +26,8 @@ const ability_warrior_1_targetEffects = [
     {
         keyword: keywords.effect.move,
         target: keywords.target.caster,
-        position: 'selected'
+        position: 'selected',
+        collision: true //true means it will hit with a blocked. False means it can jump it. It can never take it's tile
     }
 ]
             

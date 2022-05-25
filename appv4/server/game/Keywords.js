@@ -26,13 +26,14 @@ const keywords = {
         move: 'move',
         firstly: 'firstly',
         secondly: 'secondly',
+        area: 'area',
+        block: 'areaBlock',
     },
     // used for the ability target
     target: {
         caster: 'caster',
         enemy: 'enemy',
         ally: 'ally',
-        area: 'area',
     }
 }
 

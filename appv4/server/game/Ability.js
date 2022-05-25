@@ -13,6 +13,7 @@
     //     give the keyword sustain for 1 heal and 3 turns to the player using the card
     //     give the keyword sustain for 3 heal and 2 turns to all allies in the selected area
     //     move the target a distance from the player casting unit cell
+    //     move the caster  
 
     // Ability.targetEffects = [
     //     {   
@@ -64,15 +65,42 @@
     //          keyword: 'move',
     //          target: 'caster',
     //          position: 'selected' // would be an object {x: number, y: number} selected grid relative to unit position,
-    //          collision: boolean
-    //     }
+    //          collision: boolean // if false, it can go through occupied/blocked cells
+    //     },
+    //     {
+    //          keyword: 'area',
+    //          effect: {
+    //              keyword: 'damage'
+    //              target: 'all',
+    //              value: 5
+    //              sustain: true,
+    //              turns: 2,
+    //          }
+    //          turns: 3,
+    //     },
+    //     {
+    //          keyword: 'areaBlock',
+    //          target: all | ally | enemy,
+    //          turns: 3,
+    //     },
     // ]
 
 
 // id
 // name
-// selectPositions - las posiciones que se pueden elegir al usar esta carta. son genericas y despues dependera de la posicion de la unidad.
-// affectPositions - las posiciones que afecta la carta cuando es ejecutada.
+// positions - // keys correspond to a position in a grid where the player is at the center [0,0].
+                // the array corresponds of affected tiles relative to the player casting position when the cell corresponding to the key is selected as target.
+
+                // const ability_warrior_0_positions = {
+                //     '-1_1': ['-2_2','-1_1','0_1','-1_0'],       
+                //     '0_1': ['0_2','-1_1','0_1','1_1'],       
+                //     '1_1': ['2_2','0_1','1_1','1_0'],       
+                //     '-1_0': ['-1_1','-2_0','-1_0','-1_-1'],       
+                //     '1_0': ['1_1','1_0','2_0','1_-1'],       
+                //     '-1_-1': ['-1_0','-1_-1','0_-1','-2_-2'],       
+                //     '0_-1': ['-1_-1','0_-1','1_-1','0_-2'],       
+                //     '1_-1': ['1_0','0_-1','1_-1','2_-2'],       
+                //    }
 // text
 // keywords - los effectos que se aplican al jugador que usa la carta
 // targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
@@ -90,9 +118,6 @@ class Ability {
     }
     getPlayer() {
         return this.player
-    }
-    setPositions(positions) {
-        this.positions = positions
     }
     getPositions() {
         return this.positions

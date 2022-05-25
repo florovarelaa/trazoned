@@ -1,13 +1,19 @@
 class MapState {
-    constructor(map, players) {
-        this.state = new Array(map.mapSize).fill(null).map(() => new Array(map.mapSize).fill(null));
-
-        players.forEach( (player, index) => {
-            this.state[player.startingPosition.x][player.startingPosition.y] = player.unit
-        });
+    constructor(map) {
+        this.units = {
+            // '3_7': 1 // unitId
+        }
+        this.areas = {
+            // '2_8': new MapTile()
+        }
     }
     getMapState() {
         return this.state
+    }
+    setPlayers(players) {
+        players.forEach(player => {
+            this.units[`${player.startingPosition.x}_${player.startingPosition.y}`] = player.id
+        });
     }
 }
 

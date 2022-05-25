@@ -3,7 +3,7 @@ const constants = {
         0: '#214dfc',
         1: '#fc2145',
     },
-    mapSize: 5,
+    mapSize: 11,
     numberOfSteps: 2,
     unitsInitialHealth: 10,
     inventorySize: 4,

@@ -32,6 +32,7 @@ function simulatedPlayers() {
     this.newPlayer1 = () => {
         return new Player(2, deckPlayer2, player2Movements)
     }
+    this.players = [this.newPlayer0(), this.newPlayer1()]
     // this.newRandomPlayer = () => {
 
     //     function getRandomInt(max) {

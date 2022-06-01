@@ -7,7 +7,8 @@ const configuration = {
     numberOfSteps: 2,
     unitsInitialHealth: 10,
     inventorySize: 4,
-    deckSize: 7
+    deckSize: 7,
+    firstFaseDuration: 3000,
 }
 
 module.exports = configuration;

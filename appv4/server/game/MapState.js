@@ -1,6 +1,6 @@
 class MapState {
-    constructor(mapState) {
-        this.state = mapState
+    constructor(state) {
+        this.state = state
 
         // this.state = {
         //     players: {
@@ -9,6 +9,12 @@ class MapState {
         //     areas: {
         //         // '2_8': new MapTile()
         //     }
+        //    npcs: {
+            // 'unitId': x_y
+        // }
+        //    items: {
+            // 'x_y': itemId
+        // }
         // }
     }
     getMapState() {

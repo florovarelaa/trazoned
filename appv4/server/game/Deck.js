@@ -4,7 +4,7 @@ const { deckSize } = constants
 class Deck {
     constructor(unit) {
         this.unit = unit
-        this.cards = []
+        this.cards = ['card1', 'card2', 'card3', 'card4']
     }
     addCard(card) {
         if(this.cards.length < deckSize) {
@@ -12,6 +12,10 @@ class Deck {
         } else {
             console.log('deck is full')
         }
+    }
+    getRandomCard() {
+        const randomCard = this.cards[Math.floor(Math.random() * this.cards.length)];
+        return randomCard;
     }
 }
 

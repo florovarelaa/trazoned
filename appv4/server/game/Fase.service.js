@@ -1,20 +1,30 @@
 const AbilityService = require('./Ability.service')
+const PlayerService = require('./Player.service')
 
 class FaseService {
-    constructor() {
-
-    }
-    startFirstFase(game) {
+    constructor() {}
+    initFirstFase(game) {
         game.setFase(1)
         const turn = game.getTurnNumber()
-        if (turn % 2 === 0) {
-            AbilityService
+        if (turn === 1 || turn % 3 === 0) {
+            PlayerService.unblockPlayersAbilitySlot(game.players)
         }
+        PlayerService.playersDrawCards(game.players) 
+        console.log('game.players:', game.players)
+    }
+    startFirstFase(game) {
+        this.initFirstFase(game)
 
-        console.log('1 - start');
+        const turn = game.getTurnNumber()
+
+        console.log('\n');
+        console.log('------ TURN: ', turn);
+        console.log('fase 1 start');
+        console.log('...');
         return new Promise(function(resolve) {
             setTimeout(function() {
-                console.log('1 - end ');
+                console.log('fase 1 end');
+                console.log('------');
                 resolve();
             }, 3000)
         });
@@ -22,10 +32,11 @@ class FaseService {
     }
     startSecondFase(game) {
         game.setFase(2)
-        console.log('2 - START');
+        console.log('fase 2 start');
+        console.log('...');
         return new Promise(function(resolve) {
             setTimeout(function() {
-                console.log('2 - END');
+                console.log('fase 2 end');
                 resolve();
             }, 3000)
         });

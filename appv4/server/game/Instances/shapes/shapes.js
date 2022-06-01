@@ -2,7 +2,7 @@ const Shape = require('../../Shape')
 
 // --- 1 ---
 
-const _1_king = new Shape(
+const _1_king = new Shape(1, 
     {
         '-1_1': ['-1_1'],       
         '0_1': ['0_1'],       
@@ -17,7 +17,7 @@ const _1_king = new Shape(
 
 // --- 2 ---
 
-const _2_knight = new Shape(
+const _2_knight = new Shape(2, 
     {
         '-1_2': ['-1_2'],       
         '1_2': ['1_2'],       
@@ -30,7 +30,7 @@ const _2_knight = new Shape(
     }
 )
 
-const _2_invertedKnight = new Shape(
+const _2_invertedKnight = new Shape(3, 
     {
         '-2_2': ['-2_2'],       
         '0_2': ['0_2'],       
@@ -43,7 +43,7 @@ const _2_invertedKnight = new Shape(
     }
 )
   
-const _2_straight = new Shape(
+const _2_straight = new Shape(4, 
     {
         '0_2': ['0_2'],       
         '0_1': ['0_1'],       
@@ -56,7 +56,7 @@ const _2_straight = new Shape(
     }
 )
   
-const _2_cross = new Shape(
+const _2_cross = new Shape(5, 
     {
         '-2_2': ['-2_2'],       
         '-1_1': ['-1_1'],       
@@ -70,7 +70,7 @@ const _2_cross = new Shape(
 )
 
 
-const _2_rhombus = new Shape(
+const _2_rhombus = new Shape(6, 
     {
         '0_2': ['0_2'], 
         '-1_1': ['-1_1'], 
@@ -85,7 +85,7 @@ const _2_rhombus = new Shape(
 
 // --- 3 ---
   
-const _3_straight = new Shape(
+const _3_straight = new Shape(7,
     {
         '0_3': ['0_3'],       
         '0_2': ['0_2'],       
@@ -102,7 +102,7 @@ const _3_straight = new Shape(
     }
 )
 
-const _3_cross = new Shape(
+const _3_cross = new Shape(8, 
     {
         '-3_3': ['-3_3'], 
         '-2_2': ['-2_2'], 

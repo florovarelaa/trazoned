@@ -11,4 +11,5 @@ const game = new Game(simulatedPlayers.players);
 server.listen(3000, () => {
     game.init();
     console.log('listening on *:3000');
+    setTimeout( () => game.gameSimulation(), 1000)
 });

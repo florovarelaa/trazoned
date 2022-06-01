@@ -45,6 +45,9 @@ class Game {
         console.log('game starting')
         this.nextTurn(this)
     }
+    getState() {
+        return this.mapStates[this.mapStates.length - 1]
+    }
     getWinner() {
         const remainingPlayers = this.players.filter( player => {
             return player.isAlive()
@@ -64,7 +67,8 @@ class Game {
         .then(() => FaseService.startSecondFase(this))
         .then( () => {
             const winner = this.getWinner()
-            if(!winner) {
+            if (!winner) {
+                this.mapStates.push('map state')
                 this.nextTurn()
             }
 
@@ -73,6 +77,16 @@ class Game {
     }
     getTurnNumber() {
         return this.mapStates.length
+    }
+    handlePlayerMovement(playerId, movementId) {
+        console.log('playerId: ', playerId)
+        console.log('movementId: ', movementId)
+        const mapState = this.getState()
+        console.log('mapState: ', mapState)
+        MovementService.getMovementAvailablePositionsForPlayer(mapState, playerId, movementId)
+    }
+    gameSimulation() {
+        this.handlePlayerMovement(this.players[0].id, Object.keys(this.players[0].movements)[2])
     }
 }
 

@@ -10,7 +10,6 @@ class FaseService {
             PlayerService.unblockPlayersAbilitySlot(game.players)
         }
         PlayerService.playersDrawCards(game.players) 
-        console.log('game.players:', game.players)
     }
     startFirstFase(game) {
         this.initFirstFase(game)

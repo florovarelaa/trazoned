@@ -23,6 +23,10 @@ class Player {
             basicAbility1: deck.unit.basicAbility1,
             basicAbility2: deck.unit.basicAbility2
         }
+        this.equipment = {
+            armor: null,
+            weapon: null,
+        }
     }
     setColor(color) {
         this.color = color

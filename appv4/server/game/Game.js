@@ -78,15 +78,19 @@ class Game {
     getTurnNumber() {
         return this.mapStates.length
     }
-    handlePlayerMovement(playerId, movementId) {
-        console.log('playerId: ', playerId)
-        console.log('movementId: ', movementId)
-        const mapState = this.getState()
-        console.log('mapState: ', mapState)
-        MovementService.getMovementAvailablePositionsForPlayer(mapState, playerId, movementId)
+    getPlayerById(playerId) {
+        const player = this.players.filter((player) => player.id === playerId)
+
+        if (player.length === 0) return null
+
+        if (player.length > 1) throw ('players with same id')
+
+        return player[0]
     }
+
+    // Simulation
     gameSimulation() {
-        this.handlePlayerMovement(this.players[0].id, Object.keys(this.players[0].movements)[2])
+        MovementService.handlePlayerMovement(this, this.players[0].id, Object.keys(this.players[0].movements)[2])
     }
 }
 

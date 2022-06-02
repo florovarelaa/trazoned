@@ -104,10 +104,12 @@
 // text
 // keywords - los effectos que se aplican al jugador que usa la carta
 // targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
+// type: 1:Ability, 2:Movement, 3:Equipment, 4:Item
 class Ability {
-    constructor(id, name, positions, text, keywords, targetEffects) {
+    constructor(id, name, type, positions, text, keywords, targetEffects) {
         this.id = id
         this.name = name
+        this.type = type
         this.positions = positions
         this.text = text
         this.keywords = keywords

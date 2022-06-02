@@ -1,6 +1,5 @@
 class Shape {
-    constructor(id, shape) {
-        this.id = id
+    constructor(shape) {
         this.shape = shape
     }
 }

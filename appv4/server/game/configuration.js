@@ -9,7 +9,13 @@ const configuration = {
     inventorySize: 4,
     deckSize: 7,
     firstFaseDuration: 3000,
-    maxCardSlots: 5
+    maxCardSlots: 5,
+    abilityTypes: {
+        ABILITY: 1,
+        MOVEMENT: 2,
+        EQUIPMENT: 3,
+        ITEM: 4
+    },
 }
 
 module.exports = configuration;

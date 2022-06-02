@@ -1,4 +1,5 @@
 const Ability = require('../../Ability')
+const configuration = require('../../configuration')
 const keywords = require('../../Keywords')
 const SHAPES = require('../shapes/shapes')
 
@@ -32,8 +33,9 @@ const ability_mage_1_targetEffects = [
 ]
                 
 const ability_mage_0 = new Ability(
-    2,
+    102,
     'mage_0',
+    configuration.abilityTypes.ABILITY,
     ability_mage_0_positions,
     'deal damage to enemy units',
     [],
@@ -41,8 +43,9 @@ const ability_mage_0 = new Ability(
 )
 
 const ability_mage_1 = new Ability(
-    3,
+    103,
     'mage_1',
+    configuration.abilityTypes.ABILITY,
     SHAPES.movement_1_king,
     'Move 1 cell',
     [],

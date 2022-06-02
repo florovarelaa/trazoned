@@ -1,23 +1,23 @@
 const Player = require('../../Player')
 const Deck = require('../../Deck')
 const Unit = require('../../Unit')
-const SHAPES = require('../shapes/shapes')
+const MOVEMENTS = require('../abilities/movements/movements')
 const abilities = require('../abilities/abilities')
 
 const player1Movements =
 {
-    1: SHAPES._1_king,
-    2: SHAPES._2_cross,
-    3: SHAPES._2_knight,
-    4: SHAPES._3_straight
+    1: MOVEMENTS._1_king,
+    2: MOVEMENTS._2_cross,
+    3: MOVEMENTS._2_knight,
+    4: MOVEMENTS._3_straight
 }
 
 const player2Movements =
 {
-    1: SHAPES._1_king,
-    2: SHAPES._2_straight,
-    3: SHAPES._2_invertedKnight,
-    4: SHAPES._3_cross
+    1: MOVEMENTS._1_king,
+    2: MOVEMENTS._2_straight,
+    3: MOVEMENTS._2_invertedKnight,
+    4: MOVEMENTS._3_cross
 }
 let mage = new Unit('mage', abilities.mage_abilities)
 let warrior = new Unit('warrior', abilities.warrior_abilities)

@@ -9,7 +9,7 @@ const configuration = {
     inventorySize: 4,
     deckSize: 7,
     firstFaseDuration: 3000,
-    maxCardSlots: 5,
+    maxAbilitiesSlots: 5,
     abilityTypes: {
         ABILITY: 1,
         MOVEMENT: 2,

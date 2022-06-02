@@ -4,7 +4,7 @@ const configuration = require('./configuration');
 const { inventorySize, unitsInitialHealth } = configuration;
 
 class Player {
-    constructor(id, deck, movements, numberOfAvailableCardSlots = 0) {
+    constructor(id, deck, movements, numberOfAvailableAbilitiesSlots = 0) {
         this.id = id
         this.unit = deck.unit
         this.deck = deck
@@ -14,9 +14,8 @@ class Player {
         this.color
         this.startingPosition
         this.position
-        this.cardsSlots = []
-        this.currentMovements
-        this.numberOfAvailableCardSlots = numberOfAvailableCardSlots
+        this.abilitiesSlots = []
+        this.numberOfAvailableAbilitiesSlots = numberOfAvailableAbilitiesSlots
         this.turnHistory = []
         this.currentTurn = new Turn()
         this.abilities = {
@@ -47,16 +46,22 @@ class Player {
         this.position = position
     }
     unblockAbilitySlot = () => {
-        if (this.numberOfAvailableCardSlots < configuration.maxCardSlots) {
-            this.numberOfAvailableCardSlots++
+        if (this.numberOfAvailableAbilitiesSlots < configuration.maxAbilitiesSlots) {
+            this.numberOfAvailableAbilitiesSlots++
         }
     }
     drawCards = () => {
-        while (this.cardsSlots.length <= this.numberOfAvailableCardSlots ) {
+        while (this.abilitiesSlots.length <= this.numberOfAvailableAbilitiesSlots ) {
             const card = this.deck.getRandomCard()
-            this.cardsSlots.push(card)
+            this.abilitiesSlots.push(card)
         }
     }
+    getBasicAbilities = () => {
+        return Object.values(this.abilities)
+    } 
+    getMovements = () => {
+        return Object.values(this.movements)
+    } 
 }
 
 module.exports = Player;

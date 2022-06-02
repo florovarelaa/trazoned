@@ -1,7 +1,7 @@
 const Map = require('./Map.js')
 const MapState = require('./MapState.js')
 const FaseService = require('./Fase.service')
-const MovementService = require('./Movement.service')
+const AbilityService = require('./Ability.service')
 const configuration = require('./configuration');
 
 const { mapSize } = configuration;
@@ -90,7 +90,7 @@ class Game {
 
     // Simulation
     gameSimulation() {
-        MovementService.handlePlayerMovement(this, this.players[0].id, Object.keys(this.players[0].movements)[2])
+        AbilityService.handlePlayerAbility(this, this.players[0].id, this.players[0].movements[2])
     }
 }
 

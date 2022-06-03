@@ -1,6 +1,9 @@
 class MapState {
     constructor(state) {
-        this.state = state
+        const { players, areas, npcs } = state
+        this.players = players
+        this.areas = areas
+        this.npcs = npcs
 
         // this.state = {
         //     players: {
@@ -18,7 +21,11 @@ class MapState {
         // }
     }
     getMapState() {
-        return this.state
+        return {
+            players: this.players,
+            areas: this.areas,
+            npcs: this.npcs
+        }
     }
 }
 

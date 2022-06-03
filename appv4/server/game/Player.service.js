@@ -14,9 +14,8 @@ class PlayerService {
     }
     playerHasAbility(game, playerId, ability) {
         const player = game.getPlayerById(playerId)
-        if (!player) {
-            throw('player not found');
-        }
+        
+        if (!player) throw('player not found');
 
         const abilityId = ability.id;
         const abilityType = ability.type;

@@ -94,7 +94,7 @@ class Game {
     // Simulation
     gameSimulation() {
         const player1 = this.players[0]
-        AbilityService.handlePlayerAbility(this, player1.id, player1.movements[2])
+        const possiblePositions = AbilityService.handlePlayerWantToUseAbility(this, player1.id, player1.movements[1])
     }
 }
 

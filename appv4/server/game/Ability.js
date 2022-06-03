@@ -106,11 +106,11 @@
 // targetEffects - los effectos que se aplican a los jugadores que se encuentran en el area.
 // type: 1:Ability, 2:Movement, 3:Equipment, 4:Item
 class Ability {
-    constructor(id, name, type, positions, text, keywords, targetEffects) {
+    constructor(id, name, type, shape, text, keywords, targetEffects) {
         this.id = id
         this.name = name
         this.type = type
-        this.positions = positions
+        this.shape = shape
         this.text = text
         this.keywords = keywords
         this.targetEffects = targetEffects
@@ -121,8 +121,8 @@ class Ability {
     getPlayer() {
         return this.player
     }
-    getPositions() {
-        return this.positions
+    getShape() {
+        return this.shape
     }
     setSelectedCell(x, y) {
         this.selectedCell = {

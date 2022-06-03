@@ -1,19 +1,7 @@
 const Ability = require('../../Ability')
 const keywords = require('../../Keywords')
 const configuration = require('../../configuration')
-
-// keys correspond to a position in a grid where the player is at the center [0,0].
-// the array corresponds of affected tiles relative to the player casting position when the cell corresponding to the key is selected as target.
-const ability_warrior_0_positions = {
- '-1_1': ['-2_2','-1_1','0_1','-1_0'],       
- '0_1': ['0_2','-1_1','0_1','1_1'],       
- '1_1': ['2_2','0_1','1_1','1_0'],       
- '-1_0': ['-1_1','-2_0','-1_0','-1_-1'],       
- '1_0': ['1_1','1_0','2_0','1_-1'],       
- '-1_-1': ['-1_0','-1_-1','0_-1','-2_-2'],       
- '0_-1': ['-1_-1','0_-1','1_-1','0_-2'],       
- '1_-1': ['1_0','0_-1','1_-1','2_-2'],       
-}
+const SHAPES = require('../shapes/shapes')
 
 const ability_warrior_0_targetEffects = [
     {
@@ -36,7 +24,7 @@ const ability_warrior_0 = new Ability(
     100,
     'warrior_0',
     configuration.abilityTypes.ABILITY,
-    ability_warrior_0_positions,
+    SHAPES._ability_warrior_0,
     'deal damage to enemy units',
     [],
     ability_warrior_0_targetEffects

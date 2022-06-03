@@ -1,4 +1,5 @@
 const AbilityService = require('./Ability.service')
+const configuration = require('./configuration')
 const PlayerService = require('./Player.service')
 
 class FaseService {
@@ -25,7 +26,7 @@ class FaseService {
                 console.log(`fase ${game.getFase()} end`);
                 console.log('------');
                 resolve();
-            }, 3000)
+            }, configuration.firstFaseDuration)
         });
 
     }
@@ -37,7 +38,7 @@ class FaseService {
             setTimeout(function() {
                 console.log(`fase ${game.getFase()} end`);
                 resolve();
-            }, 3000)
+            }, 1500)
         });
     }
 }

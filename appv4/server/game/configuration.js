@@ -8,7 +8,7 @@ const configuration = {
     unitsInitialHealth: 10,
     inventorySize: 4,
     deckSize: 7,
-    firstFaseDuration: 3000,
+    firstFaseDuration: 1500,
     maxAbilitiesSlots: 5,
     abilityTypes: {
         ABILITY: 1,

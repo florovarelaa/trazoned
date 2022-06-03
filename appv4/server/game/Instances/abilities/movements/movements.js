@@ -13,7 +13,7 @@ const movement_targetEffects = [
 
 const _1_king = new Ability(
     1,
-    '1 straight',
+    '1 king',
     configuration.abilityTypes.MOVEMENT,
     SHAPES._1_king,
     'Move to selected cell',

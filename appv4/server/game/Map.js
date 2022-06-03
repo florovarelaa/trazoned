@@ -22,11 +22,14 @@ class MapTile {
 
 class Map {
     constructor(mapSize) {
+        const mapCenter = Math.floor(mapSize/2)
+        const mapCenterKey = `${mapCenter}_${mapCenter}`
         this.areas = {
+            [mapCenterKey]: 'b'
+        }
             // TODO
             // this is the state of the map, blocked tiles, wind tiles, sustain tiles.
             // '2_8': new MapTile()
-        }
         this.mapSize = mapSize;
         this.playersCells = [
             {

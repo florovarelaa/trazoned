@@ -14,6 +14,14 @@ class AbilityService {
         // TODO filter availablePositions depending on mapState.
         return availablePositions
     }
+    handlePlayerUseAbility(game, playerId, ability, keyAsPosition) {
+        const playerHasAbility = PlayerService.playerHasAbility(game, playerId, ability)
+        if (!playerHasAbility) throw('player can not use that ability')
+        const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
+        const positionInAvailablePositions = this.keyAsPositionInAvailablePositions(keyAsPosition, availablePositions)
+        if(!positionInAvailablePositions) throw('invalid selected position')
+        console.log('positionInAvailablePositions: ', positionInAvailablePositions)
+    }
     getAbilityAvailablePositionsForPlayer(game, playerId, ability) {
         const player = game.getPlayerById(playerId)
 
@@ -74,6 +82,10 @@ class AbilityService {
             x: parseInt(keyAsXY.x, 10) + parseInt(positionAsXY.x, 10),
             y: parseInt(keyAsXY.y, 10) + parseInt(positionAsXY.y, 10),
         }
+    }
+    keyAsPositionInAvailablePositions(keyAsPosition, availablePositions) {
+        const isAvailable = availablePositions[keyAsPosition]
+        return isAvailable
     }
 }
 

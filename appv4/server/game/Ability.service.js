@@ -1,5 +1,6 @@
 const configuration = require('./configuration');
 const PlayerService = require('./Player.service');
+const MapService = require('./Map.service');
 
 class AbilityService {
     constructor(mapSize) {
@@ -11,6 +12,7 @@ class AbilityService {
         if (!playerHasAbility) throw('player can not use that ability')
         const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
         // TODO filter availablePositions depending on mapState.
+        return availablePositions
     }
     getAbilityAvailablePositionsForPlayer(game, playerId, ability) {
         const player = game.getPlayerById(playerId)
@@ -51,14 +53,16 @@ class AbilityService {
         for (let key in positions) {
             const keyAsXY = this.getPositionAsXY(key)
             const addedKeyAsXY = this.addKeyAsXYAndPositionAsXY(keyAsXY, positionAsXY)
+            if ( MapService.isOutOfMap(addedKeyAsXY) ) continue 
             const addedKey = this.getXYAsPosition(addedKeyAsXY)
-            
+
             const addedKeyPositions = positions[key].map( (position, index) => {
                 const indexPositionAsXY = this.getPositionAsXY(position)
                 const addedPositionAsXY = this.addKeyAsXYAndPositionAsXY(indexPositionAsXY, positionAsXY)
+                if ( MapService.isOutOfMap(addedPositionAsXY) ) return false
                 const addedPosition = this.getXYAsPosition(addedPositionAsXY)
                 return addedPosition
-            })
+            }).filter((position) => position !== false)
 
             addedPositions[addedKey] = addedKeyPositions;
         }

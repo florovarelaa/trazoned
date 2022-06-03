@@ -6,14 +6,17 @@ class AbilityService {
         this.mapSize = mapSize
     }
     handlePlayerAbility(game, playerId, ability) {
-        // console.log('playerId: ', playerId)
-        // console.log('abilityId: ', ability)
         const mapState = game.getState()
-        // console.log('mapState: ', game.getState())
-        const playerHasAbility = PlayerService.playerHasAbility(game, playerId, ability.id, ability.type)
+        const playerHasAbility = PlayerService.playerHasAbility(game, playerId, ability)
+        if (!playerHasAbility) throw('player can not use that ability')
         this.getAbilityAvailablePositionsForPlayer(mapState, playerId, ability)
     }
     getAbilityAvailablePositionsForPlayer(mapState, playerId, ability) {
+        console.log('mapState: ', mapState)
+        console.log('--------------------')
+        console.log('playerId: ', playerId)
+        console.log('--------------------')
+        console.log('ability: ', ability)
     }
 }
 

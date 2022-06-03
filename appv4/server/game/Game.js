@@ -62,6 +62,9 @@ class Game {
     setFase(fase) {
         this.fase = fase
     }
+    getFase() {
+        return this.fase
+    }
     nextTurn() {
         FaseService.startFirstFase(this)
         .then(() => FaseService.startSecondFase(this))
@@ -90,7 +93,8 @@ class Game {
 
     // Simulation
     gameSimulation() {
-        AbilityService.handlePlayerAbility(this, this.players[0].id, this.players[0].movements[2])
+        const player1 = this.players[0]
+        AbilityService.handlePlayerAbility(this, player1.id, player1.movements[2])
     }
 }
 

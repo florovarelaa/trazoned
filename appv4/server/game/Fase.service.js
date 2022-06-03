@@ -18,11 +18,11 @@ class FaseService {
 
         console.log('\n');
         console.log('------ TURN: ', turn);
-        console.log('fase 1 start');
+        console.log(`fase ${game.getFase()} start`);
         console.log('...');
         return new Promise(function(resolve) {
             setTimeout(function() {
-                console.log('fase 1 end');
+                console.log(`fase ${game.getFase()} end`);
                 console.log('------');
                 resolve();
             }, 3000)
@@ -31,11 +31,11 @@ class FaseService {
     }
     startSecondFase(game) {
         game.setFase(2)
-        console.log('fase 2 start');
+        console.log(`fase ${game.getFase()} start`);
         console.log('...');
         return new Promise(function(resolve) {
             setTimeout(function() {
-                console.log('fase 2 end');
+                console.log(`fase ${game.getFase()} end`);
                 resolve();
             }, 3000)
         });

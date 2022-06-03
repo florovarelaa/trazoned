@@ -12,26 +12,25 @@ class PlayerService {
             player.drawCards()
         })
     }
-    playerHasAbility(game, playerId, abilityId, abilityType) {
+    playerHasAbility(game, playerId, ability) {
         const player = game.getPlayerById(playerId)
         if (!player) {
             throw('player not found');
         }
 
-        console.log('abilityType. ?', abilityType)
-        let ability;
+        const abilityId = ability.id;
+        const abilityType = ability.type;
+
+        let playerAbility;
         switch (abilityType) {
             case configuration.abilityTypes.ABILITY:
                 const basicAbilities = player.getBasicAbilities();
-                const basicAbility = basicAbilities.filter( ability => ability.id === abilityId)
-                console.log('basicAbility', basicAbility)
+                playerAbility = basicAbilities.filter( ability => ability.id === abilityId)
                 break;
         
             case configuration.abilityTypes.MOVEMENT:
                 const movements = player.getMovements();
-                const movement = movements.filter( ability => ability.id === abilityId)
-                console.log('abilityId: ', abilityId)
-                console.log('movement', movement)
+                playerAbility = movements.filter( movement => movement.id === abilityId)
                 break;
         
             case configuration.abilityTypes.EQUIPMENT:
@@ -41,15 +40,13 @@ class PlayerService {
             case configuration.abilityTypes.ITEM:
                 //TODO
                 break;
-        
             default:
                 break;
         }
 
-        // TODO - continuar por aca. Hay que refactorizar antes. Los movimientos o shapes, tienen que ser abilities al igual que las armas. Todo es una ability y tienen id's.
-        // A partir de esos ids podemos continuar sabiendo si el player tiene o no movement.
-        // console.log('player abilities', player.abilities)
-        // console.log('player movements', player.movements)
+        if (playerAbility) return true
+
+        return false
     }
 }
 

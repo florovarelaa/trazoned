@@ -1,7 +1,7 @@
 class Shape {
-    constructor(id, shape) {
+    constructor(id, positions) {
         this.id = id
-        this.shape = shape
+        this.positions = positions
     }
 }
 

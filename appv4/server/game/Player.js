@@ -19,8 +19,8 @@ class Player {
         this.turnHistory = []
         this.currentTurn = new Turn()
         this.abilities = {
-            basicAbility1: deck.unit.basicAbility1,
-            basicAbility2: deck.unit.basicAbility2
+            1: deck.unit.basicAbility1,
+            2: deck.unit.basicAbility2
         }
         this.equipment = {
             armor: null,

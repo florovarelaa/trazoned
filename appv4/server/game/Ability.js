@@ -4,7 +4,7 @@
 
 // targetEffects
 
-    // This ability when fast will
+    // This ability when cast will
     //     deal 10 damage to all enemies in the selected area
     //     heal 10 damage to the player unsing the card
     //     give the keyword sustain to for 2 damage and 4 turns on all enemies in the selected area

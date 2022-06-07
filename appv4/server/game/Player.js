@@ -18,6 +18,7 @@ class Player {
         this.numberOfAvailableAbilitiesSlots = numberOfAvailableAbilitiesSlots
         this.turnHistory = []
         this.currentTurn = new Turn()
+        this.wishedTurn = []
         this.abilities = {
             1: deck.unit.basicAbility1,
             2: deck.unit.basicAbility2
@@ -62,6 +63,9 @@ class Player {
     getMovements = () => {
         return Object.values(this.movements)
     } 
+    setPlayerWishedTurn(abilityId, selectedCell, step) {
+        this.wishedTurn[step]
+    }
 }
 
 module.exports = Player;

@@ -14,13 +14,28 @@ class AbilityService {
         // TODO filter availablePositions depending on mapState.
         return availablePositions
     }
-    handlePlayerUseAbility(game, playerId, ability, keyAsPosition) {
-        const playerHasAbility = PlayerService.playerHasAbility(game, playerId, ability)
-        if (!playerHasAbility) throw('player can not use that ability')
-        const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
-        const positionInAvailablePositions = this.keyAsPositionInAvailablePositions(keyAsPosition, availablePositions)
-        if(!positionInAvailablePositions) throw('invalid selected position')
-        console.log('positionInAvailablePositions: ', positionInAvailablePositions)
+    handlePlayerUseAbility(game, playerId, ability, selectedCellKeyAsPosition, step) {
+        try {
+            PlayerService.playerHasAbility(game, playerId, ability)
+        } catch (error) {
+            console.error(error);            
+        }
+
+        let positionInAvailablePositions
+        try {
+            const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
+           positionInAvailablePositions = this.keyAsPositionInAvailablePositions(selectedCellKeyAsPosition, availablePositions)
+        } catch (error) {
+            console.error(error);    
+            if(!positionInAvailablePositions) return
+        }
+
+        //ACAAA
+        const selectedAbilityKeyAsPosition = 0
+        // = this.getSelectedAbilityKeyAsPosition(selectedCellKeyAsPosition)
+
+        // TODO set player wished turn
+        PlayerService.setPlayerWishedTurn(game, playerId, ability.id, selectedAbilityKeyAsPosition, step)
     }
     getAbilityAvailablePositionsForPlayer(game, playerId, ability) {
         const player = game.getPlayerById(playerId)
@@ -35,9 +50,10 @@ class AbilityService {
 
         const abilityShapePositions = ability.shape.positions
 
-        const addedPositionAsXY = this.addPositionAsXYAndShapePositions(positionAsXY, abilityShapePositions)
+        const addedPositionsAsXY = this.addPositionAsXYAndShapePositions(positionAsXY, abilityShapePositions)
 
-        return addedPositionAsXY
+        console.log('addedPositionsAsXY: ', addedPositionsAsXY)
+        return addedPositionsAsXY
     }
     getPositionAsXY(position) {
         const coordinates = position.split('_')
@@ -85,7 +101,10 @@ class AbilityService {
     }
     keyAsPositionInAvailablePositions(keyAsPosition, availablePositions) {
         const isAvailable = availablePositions[keyAsPosition]
-        return isAvailable
+
+        if(!isAvailable) throw('invalid selected position')
+
+        return true
     }
 }
 

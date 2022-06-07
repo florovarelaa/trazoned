@@ -45,7 +45,11 @@ class PlayerService {
 
         if (playerAbility) return true
 
-        return false
+        throw('player can not use that ability')
+    }
+    setPlayerWishedTurn(game, playerId, abilityId, selectedCell, step) {
+        const player = game.getPlayerById(playerId)
+        player.setPlayerWishedTurn(abilityId, selectedCell, step)    
     }
 }
 

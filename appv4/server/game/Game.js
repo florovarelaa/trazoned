@@ -22,18 +22,19 @@ class Game {
             npcs: {}
         }
 
-        const playersCells = this.map.getPlayersStartingCells(this.players.length)
+        const playersCoordinates = this.map.getPlayersStartingCoordinates(this.players.length)
         this.players.forEach( (player, index) => {
-            const position = playersCells[index]
-            const positionKey = `${position.x}_${position.y}`
-            initialState.players[player.id] = positionKey
+            const coordinates = playersCoordinates[index]
+            const key = `${coordinates.x}_${coordinates.y}`
+            initialState.players[player.id] = key
+            player.setCoordinates(coordinates)
         })
         
-        const npcCells = this.map.getNpcCells(this.players.length)
-        npcCells.forEach( (cell, index) => {
-            const position = cell
-            const positionKey = `${position.x}_${position.y}`
-            initialState.npcs[this.players.length + 1 + index] = positionKey
+        const npcCoordinates = this.map.getNpcCoordinates(this.players.length)
+        npcCoordinates.forEach( (cell, index) => {
+            const coordinates = cell
+            const key = `${coordinates.x}_${coordinates.y}`
+            initialState.npcs[this.players.length + 1 + index] = key
         })
         
         const initialMapState = new MapState(initialState)
@@ -94,9 +95,9 @@ class Game {
     // Simulation
     gameSimulation() {
         const player1 = this.players[0]
-        const availablePositions = AbilityService.handlePlayerWantToUseAbility(this, player1.id, player1.abilities[1])
-        const chosenKey = Object.keys(availablePositions)[0]
         const step = 1;
+        const availablePositions = AbilityService.handlePlayerWantToUseAbility(this, player1.id, player1.abilities[1], step)
+        const chosenKey = Object.keys(availablePositions)[0]
         const playerUseAbility = AbilityService.handlePlayerUseAbility(this, player1.id, player1.abilities[1], chosenKey, step)
     }
 }

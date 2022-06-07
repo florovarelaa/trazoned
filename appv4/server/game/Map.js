@@ -31,7 +31,7 @@ class Map {
             // this is the state of the map, blocked tiles, wind tiles, sustain tiles.
             // '2_8': new MapTile()
         this.mapSize = mapSize;
-        this.playersCells = [
+        this.playersCoordinates = [
             {
                 x: Math.floor(this.mapSize/2),
                 y: 0 
@@ -53,7 +53,7 @@ class Map {
             x: Math.floor(this.mapSize/2),
             y: Math.floor(this.mapSize/2),
         }]
-        this.npcCells = [
+        this.npcCoordinates = [
             {
                 x: 3,
                 y: Math.floor(this.mapSize/2)
@@ -72,14 +72,14 @@ class Map {
             },
         ]
     }
-    getPlayersStartingCells(numberOfPlayers) {
-        return this.playersCells.slice(0, numberOfPlayers);
+    getPlayersStartingCoordinates(numberOfPlayers) {
+        return this.playersCoordinates.slice(0, numberOfPlayers);
     }
-    getBossCells() {
+    getBossCoordinates() {
         return this.bossCells
     }
-    getNpcCells(numberOfPlayers) {
-        return this.npcCells.slice(0, numberOfPlayers);
+    getNpcCoordinates(numberOfPlayers) {
+        return this.npcCoordinates.slice(0, numberOfPlayers);
     }
 }
 

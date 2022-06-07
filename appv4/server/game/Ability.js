@@ -83,6 +83,10 @@
     //          target: all | ally | enemy,
     //          turns: 3,
     //     },
+    //      {
+    //          keyword: targeted, abilities with this keyword must have a shape with all cells available to a distance, a rhombus shape
+    //          target: all | ally | enemy
+    //      }
     // ]
 
 

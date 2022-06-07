@@ -12,13 +12,14 @@ class Player {
         this.inventory = new Inventory(inventorySize)
         this.health = unitsInitialHealth
         this.color
-        this.startingPosition
-        this.position
+        this.startingCoordinates
+        this.coordinates
         this.abilitiesSlots = []
         this.numberOfAvailableAbilitiesSlots = numberOfAvailableAbilitiesSlots
         this.turnHistory = []
         this.currentTurn = new Turn()
         this.wishedTurn = []
+        this.turnCoordinates = Array.apply(null, Array(configuration.stepsPerTurn * 2)).map(function () {})
         this.abilities = {
             1: deck.unit.basicAbility1,
             2: deck.unit.basicAbility2
@@ -26,6 +27,7 @@ class Player {
         this.equipment = {
             armor: null,
             weapon: null,
+            amulet: null,
         }
     }
     setColor(color) {
@@ -43,8 +45,8 @@ class Player {
     getDeck = () => {
         return this.deck
     }
-    setPosition = (position) => {
-        this.position = position
+    setCoordinates = (coordinates) => {
+        this.coordinates = coordinates
     }
     unblockAbilitySlot = () => {
         if (this.numberOfAvailableAbilitiesSlots < configuration.maxAbilitiesSlots) {
@@ -63,8 +65,11 @@ class Player {
     getMovements = () => {
         return Object.values(this.movements)
     } 
-    setPlayerWishedTurn(abilityId, selectedCell, step) {
-        this.wishedTurn[step]
+    setPlayerWishedTurn(abilityId, chosenKey, step) {
+        this.wishedTurn[step] = {
+            abilityId,
+            chosenKey
+        }
     }
 }
 

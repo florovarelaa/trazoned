@@ -7,18 +7,37 @@ class AbilityService {
         this.mapSize = mapSize
     }
     // fasePosition = { 0, 1, 2, 3}
-    handlePlayerWantToUseAbility(game, playerId, ability) {
-        const playerHasAbility = PlayerService.playerHasAbility(game, playerId, ability)
+    handlePlayerWantToUseAbility(game, playerId, ability, step) {
+        let player;
+        try {
+            player = game.getPlayerById(playerId)
+        
+            if (!player) throw('player not found');
+        } catch (error) {
+            console.error(error);            
+        }
+
+        let playerHasAbility
+        try {
+            playerHasAbility = PlayerService.playerHasAbility(player, ability)
+        } catch (error) {
+            console.error(error);            
+        }
         if (!playerHasAbility) throw('player can not use that ability')
         const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
         // TODO filter availablePositions depending on mapState.
         return availablePositions
     }
     handlePlayerUseAbility(game, playerId, ability, chosenKey, step) {
+        let player
         try {
-            PlayerService.playerHasAbility(game, playerId, ability)
+            player = game.getPlayerById(playerId)
+        
+            if (!player) throw('player not found');
+            PlayerService.playerHasAbility(player, ability)
         } catch (error) {
-            console.error(error);            
+            console.error(error);
+            return          
         }
 
         let keyInAvailablePositions
@@ -31,7 +50,10 @@ class AbilityService {
         }
 
         // convert from chosenKey to the matching key on the ability. (chosen key - player position)
+        const playerPosition = game.getState().players[playerId]
 
+        console.log('playerPosition: ', playerPosition);
+        const abilityChosenKey = this.fromPlayerChosenKeyToAbilityKey(player, chosenKey, ability)
         // TODO set player wished turn
         PlayerService.setPlayerWishedTurn(game, playerId, ability.id, chosenKey, step)
     }
@@ -99,6 +121,8 @@ class AbilityService {
         if(!isAvailable) throw('invalid selected position')
 
         return true
+    }
+    fromPlayerChosenKeyToAbilityKey(player, chosenKey, ability) {
     }
 }
 

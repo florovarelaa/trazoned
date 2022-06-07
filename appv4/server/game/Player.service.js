@@ -12,11 +12,7 @@ class PlayerService {
             player.drawCards()
         })
     }
-    playerHasAbility(game, playerId, ability) {
-        const player = game.getPlayerById(playerId)
-        
-        if (!player) throw('player not found');
-
+    playerHasAbility( player, ability) {
         const abilityId = ability.id;
         const abilityType = ability.type;
 

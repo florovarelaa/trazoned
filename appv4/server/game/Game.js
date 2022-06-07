@@ -94,11 +94,10 @@ class Game {
     // Simulation
     gameSimulation() {
         const player1 = this.players[0]
-        const availableCells = AbilityService.handlePlayerWantToUseAbility(this, player1.id, player1.abilities[1])
-        const chosenCellPosition = Object.keys(availableCells)[0]
-        console.log('chosenCellPosition: ', chosenCellPosition);
+        const availablePositions = AbilityService.handlePlayerWantToUseAbility(this, player1.id, player1.abilities[1])
+        const chosenKey = Object.keys(availablePositions)[0]
         const step = 1;
-        const playerUseAbility = AbilityService.handlePlayerUseAbility(this, player1.id, player1.abilities[1], chosenCellPosition, step)
+        const playerUseAbility = AbilityService.handlePlayerUseAbility(this, player1.id, player1.abilities[1], chosenKey, step)
     }
 }
 

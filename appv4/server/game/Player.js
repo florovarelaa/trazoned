@@ -14,12 +14,12 @@ class Player {
         this.color
         this.startingCoordinates
         this.coordinates
+        this.position
         this.abilitiesSlots = []
         this.numberOfAvailableAbilitiesSlots = numberOfAvailableAbilitiesSlots
         this.turnHistory = []
-        this.currentTurn = new Turn()
         this.wishedTurn = []
-        this.turnCoordinates = Array.apply(null, Array(configuration.stepsPerTurn * 2)).map(function () {})
+        this.positionsAtSteps = Array(4).fill(null)
         this.abilities = {
             1: deck.unit.basicAbility1,
             2: deck.unit.basicAbility2
@@ -48,6 +48,12 @@ class Player {
     setCoordinates = (coordinates) => {
         this.coordinates = coordinates
     }
+    setPosition (position) {
+        this.position = position
+    }
+    getPosition () {
+        return this.position
+    }
     unblockAbilitySlot = () => {
         if (this.numberOfAvailableAbilitiesSlots < configuration.maxAbilitiesSlots) {
             this.numberOfAvailableAbilitiesSlots++
@@ -65,11 +71,23 @@ class Player {
     getMovements = () => {
         return Object.values(this.movements)
     } 
-    setPlayerWishedTurn(abilityId, chosenKey, step) {
+    setPlayerWishedTurn(abilityId, chosenPosition, step) {
         this.wishedTurn[step] = {
             abilityId,
-            chosenKey
+            chosenPosition
         }
+    }
+    setPositionAtStep(step, position) {
+        this.positionsAtSteps[step] = position
+    }
+    getPositionAtStep(step) {
+        let position
+        (step === 0) ? 
+            position = this.position
+        : 
+            position = this.positionsAtSteps[step]
+
+        return position
     }
 }
 

@@ -24,11 +24,15 @@ class AbilityService {
             console.error(error);            
         }
         if (!playerHasAbility) throw('player can not use that ability')
-        const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
+
+        // get player position at step
+        const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
+
+        const availablePositions = this.getAbilityAvailablePositionsForPosition(playerPositionAtStep, ability)
         // TODO filter availablePositions depending on mapState.
         return availablePositions
     }
-    handlePlayerUseAbility(game, playerId, ability, chosenKey, step) {
+    handlePlayerUseAbility(game, playerId, ability, chosenPosition, step) {
         let player
         try {
             player = game.getPlayerById(playerId)
@@ -40,49 +44,46 @@ class AbilityService {
             return          
         }
 
-        let keyInAvailablePositions
+        // get player position at step
+        const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
+
+        let positionInAvailablePositions
         try {
-            const availablePositions = this.getAbilityAvailablePositionsForPlayer(game, playerId, ability)
-           keyInAvailablePositions = this.keyInAvailablePositions(chosenKey, availablePositions)
+            const availablePositions = this.getAbilityAvailablePositionsForPosition(playerPositionAtStep, ability)
+           positionInAvailablePositions = this.positionInAvailablePositions(chosenPosition, availablePositions)
         } catch (error) {
             console.error(error);    
-            if(!keyInAvailablePositions) return
+            if(!positionInAvailablePositions) return
         }
 
-        // convert from chosenKey to the matching key on the ability. (chosen key - player position)
-        const playerPosition = game.getState().players[playerId]
+        // convert from chosenPosition to the matching key on the ability. (chosen key - player position)
+        const playerPosition = player.getPosition()
 
         console.log('playerPosition: ', playerPosition);
-        const abilityChosenKey = this.fromPlayerChosenKeyToAbilityKey(player, chosenKey, ability)
+        const abilityChosenPosition = this.fromPlayerChosenPositionToAbilityPosition(playerPosition, chosenPosition, ability)
         // TODO set player wished turn
-        PlayerService.setPlayerWishedTurn(game, playerId, ability.id, chosenKey, step)
+        PlayerService.setPlayerWishedTurn(game, playerId, ability.id, abilityChosenPosition, step)
     }
-    getAbilityAvailablePositionsForPlayer(game, playerId, ability) {
-        const player = game.getPlayerById(playerId)
+    getAbilityAvailablePositionsForPosition(position, ability) {
 
-        if (!player) throw('player not found');
-
-        const mapState = game.getState()
-
-        const playerKey = mapState.players[playerId]
-        const playerCoordinates = this.getCoordinatesFromKey(playerKey);
+        const coordinates = this.getCoordinatesFromPosition(position);
         
         const abilityShapePositions = ability.shape.positions
 
-        const addedPositions = this.addCoordiantesAndPositions(playerCoordinates, abilityShapePositions)
+        const addedPositions = this.addCoordiantesAndPositions(coordinates, abilityShapePositions)
         return addedPositions
     }
-    getCoordinatesFromKey(key) {
-        const coordinates = key.split('_')
-        const x = coordinates[0]
-        const y = coordinates[1]
+    getCoordinatesFromPosition(position) {
+        const coordinatesArr = position.split('_')
+        const x = coordinatesArr[0]
+        const y = coordinatesArr[1]
 
-        const positionAsXY = {
+        const coordinates = {
             x,
             y
         }
 
-        return positionAsXY
+        return coordinates
     }
     getKeyFromCoordinates(coordinates) {
         const { x, y } = coordinates
@@ -91,13 +92,13 @@ class AbilityService {
     addCoordiantesAndPositions(coordinates, shapePositions) {
         let addedPositions = {};
         for (let key in shapePositions) {
-            const keypos = this.getCoordinatesFromKey(key)
+            const keypos = this.getCoordinatesFromPosition(key)
             const addedCoordinates = this.addCoordinates(keypos, coordinates)
             if ( MapService.isOutOfMap(addedCoordinates) ) continue 
             const addedKey = this.getKeyFromCoordinates(addedCoordinates)
 
             const addedKeyPositions = shapePositions[key].map( (key, index) => {
-                const keyCoordinates = this.getCoordinatesFromKey(key)
+                const keyCoordinates = this.getCoordinatesFromPosition(key)
                 const addedCoords = this.addCoordinates(keyCoordinates, coordinates)
                 if ( MapService.isOutOfMap(addedCoords) ) return false
                 const addedPosition = this.getKeyFromCoordinates(addedCoords)
@@ -115,14 +116,14 @@ class AbilityService {
             y: parseInt(coordinate1.y, 10) + parseInt(coordinate2.y, 10),
         }
     }
-    keyInAvailablePositions(key, availablePositions) {
+    positionInAvailablePositions(key, availablePositions) {
         const isAvailable = availablePositions[key]
 
         if(!isAvailable) throw('invalid selected position')
 
         return true
     }
-    fromPlayerChosenKeyToAbilityKey(player, chosenKey, ability) {
+    fromPlayerChosenPositionToAbilityPosition(playerPosition, chosenPosition, ability) {
     }
 }
 

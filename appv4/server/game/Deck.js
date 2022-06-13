@@ -4,7 +4,7 @@ const { deckSize } = configuration
 class Deck {
     constructor(unit) {
         this.unit = unit
-        this.cards = ['card1', 'card2', 'card3', 'card4']
+        this.cards = ['card1Id', 'card2Id', 'card3Id', 'card4Id']
     }
     addCard(card) {
         if(this.cards.length < deckSize) {

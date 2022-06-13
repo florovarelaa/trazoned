@@ -12,7 +12,8 @@ class PlayerService {
             player.drawCards()
         })
     }
-    playerHasAbility( player, ability) {
+    playerHasAbility( player, ability ) {
+        // TODO check that ability is not in cooldown
         const abilityId = ability.id;
         const abilityType = ability.type;
 
@@ -43,9 +44,15 @@ class PlayerService {
 
         throw('player can not use that ability')
     }
-    setPlayerWishedTurn(game, playerId, abilityId, chosenKey, step) {
+    setPlayerWishedTurn(game, playerId, abilityId, chosenPosition, step) {
         const player = game.getPlayerById(playerId)
-        player.setPlayerWishedTurn(abilityId, chosenKey, step)    
+        player.setPlayerWishedTurn(abilityId, chosenPosition, step)    
+    }
+    getPositionAtStep(player, step) {
+        return player.getPositionAtStep(step);
+    }
+    setPositionAtStep(player, step, position) {
+        player.setPositionAtStep(step, position)
     }
 }
 

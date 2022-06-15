@@ -1,6 +1,6 @@
 // keywords - all that affects the step of the casting unit
 
-//      Ability.keywords = ['exhaust', 'silence', 'fast', 'slow', 'firstly', 'secondly', 'hybrid']
+//      Ability.keywords = ['fast', 'slow', 'firstly', 'secondly', 'hybrid']
 
 // targetEffects
 

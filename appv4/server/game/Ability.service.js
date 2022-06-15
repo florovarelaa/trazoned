@@ -25,6 +25,10 @@ class AbilityService {
         }
         if (!playerHasAbility) throw('player can not use that ability')
 
+        // if(ability.isAMovement() && (step === 1 || step === 3) ) {
+        //     throw('cannot use a movement as an ability')
+        // }
+
         // get player position at step
         const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
 
@@ -46,6 +50,7 @@ class AbilityService {
 
         // get player position at step
         const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
+        console.log('ability: ', ability);
 
         let positionInAvailablePositions
         try {

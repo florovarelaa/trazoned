@@ -2,6 +2,26 @@ const Shape = require('../../Shape')
 
 // MOVEMENTS
 
+// --- 0 ---
+
+const _0_rhombus = new Shape(
+    0, 
+    {
+        '-1_1': ['-1_1'],       
+        '0_1': ['0_1'],       
+        '1_1': ['1_1'],       
+        '-1_0': ['-1_0'],       
+        '1_0': ['1_0'],       
+        '-1_-1': ['-1_-1'],       
+        '0_-1': ['0_-1'],       
+        '1_-1': ['1_-1'],
+        '0_2': ['0_2'],
+        '-2_0': ['-2_0'],
+        '2_0': ['2_0'],
+        '0_-2': ['0_-2'],
+    }
+)
+
 // --- 1 ---
 
 const _1_king = new Shape(
@@ -129,9 +149,6 @@ const _3_cross = new Shape(
     }
 )
 
-// --- WARRIOR ---
-
-
 // keys correspond to a position in a grid where the player is at the center [0,0].
 // the array corresponds of affected tiles relative to the player casting position when the cell corresponding to the key is selected as target.
 const _ability_warrior_0 = new Shape(
@@ -162,8 +179,8 @@ const _ability_mage_0 = new Shape(
     }
 )
 
-
 const SHAPES = {
+    _0_rhombus,
     _1_king,
     _2_straight,
     _2_cross,
@@ -173,7 +190,7 @@ const SHAPES = {
     _3_straight,
     _3_cross,
     _ability_warrior_0,
-    _ability_mage_0
+    _ability_mage_0,
 }
 
 module.exports = SHAPES;

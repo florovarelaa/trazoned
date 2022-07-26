@@ -15,7 +15,7 @@ const ability_warrior_1 = new Ability(
     101,
     'warrior_1',
     configuration.abilityTypes.ABILITY,
-    SHAPES._1_king,
+    SHAPES._1_8_1_,
     'daño muy fuerte 1 casilla',
     [],
     ability_warrior_1_targetEffects
@@ -33,7 +33,7 @@ const ability_warrior_2 = new Ability(
     102,
     'warrior_2',
     configuration.abilityTypes.ABILITY,
-    SHAPES._0_rhombus,
+    SHAPES._1_12_,
     'daño medio hasta 2 casillas',
     [],
     ability_warrior_2_targetEffects
@@ -51,7 +51,7 @@ const ability_warrior_3 = new Ability(
     103,
     'warrior_3',
     configuration.abilityTypes.ABILITY,
-    SHAPES._1_king,
+    SHAPES._1_8_1_,
     'fast: daño debil 1 casilla',
     [keywords.caster.fast],
     ability_warrior_3_targetEffects
@@ -73,7 +73,7 @@ const ability_warrior_4 = new Ability(
     104,
     'warrior_4',
     configuration.abilityTypes.ABILITY,
-    SHAPES._0_rhombus,
+    SHAPES._1_12_,
     'daño muy debil hasta 2 casillas. aplica exhaust',
     [],
     ability_warrior_4_targetEffects
@@ -92,7 +92,7 @@ const ability_warrior_5 = new Ability(
     105,
     'warrior_5',
     configuration.abilityTypes.ABILITY,
-    SHAPES._1_rhombus,
+    SHAPES._1_16_1_,
     'movimiento 2 casillas',
     [],
     ability_warrior_5_targetEffects

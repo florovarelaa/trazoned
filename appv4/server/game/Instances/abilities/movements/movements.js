@@ -11,18 +11,18 @@ const movement_targetEffects = [
     }
 ]
 
-const _0_rhombus = new Ability(
+const _1_12_ = new Ability(
     0,
     'rhombus',
     configuration.abilityTypes.MOVEMENT,
-    SHAPES._0_rhombus,
+    SHAPES._1_12_,
     'Move to selected cell',
     [],
     movement_targetEffects
 )
 
 const MOVEMENTS = {
-    _0_rhombus,
+    _1_12_,
 }
 
 module.exports = MOVEMENTS

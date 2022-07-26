@@ -109,7 +109,7 @@ const ability_mage_6 = new Ability(
     206,
     'mage_6',
     configuration.abilityTypes.ABILITY,
-    SHAPES._0_rhombus,
+    SHAPES._1_12_,
     'sustain(3) muy debil hasta 2 casillas',
     [],
     ability_mage_6_targetEffects

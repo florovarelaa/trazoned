@@ -6,7 +6,7 @@ const none = {}
 
 // --- 0 ---
 
-const _0_rhombus = new Shape(
+const _1_12_ = new Shape(
     0, 
     {
         '-1_1': ['-1_1'],       
@@ -26,18 +26,14 @@ const _0_rhombus = new Shape(
 
 // --- 1 ---
 
-const _1_cross = new Shape(
+const _1_1_5_ = new Shape(
     12,
     {
-        '0_0': ['0_0'],
-        '-1_0': ['-1_0'],
-        '0_1': ['0_1'],
-        '1_0': ['1_0'],
-        '0_-1': ['0_-1'],
+        '0_0': ['0_0', '-1_0', '0_1', '1_0', '0_-1'],
     }
 )
 
-const _1_king = new Shape(
+const _1_8_1_ = new Shape(
     1, 
     {
         '-1_1': ['-1_1'],       
@@ -51,7 +47,7 @@ const _1_king = new Shape(
     }
 )
 
-const _1_rhombus = new Shape(
+const _1_16_1_ = new Shape(
     10, 
     {
         '-1_1': ['-1_1'],       
@@ -220,42 +216,12 @@ const _3_cross = new Shape(
     }
 )
 
-// keys correspond to a position in a grid where the player is at the center [0,0].
-// the array corresponds of affected tiles relative to the player casting position when the cell corresponding to the key is selected as target.
-const _ability_warrior_0 = new Shape(
-    9,
-    {
-        '-1_1': ['-2_2','-1_1','0_1','-1_0'],       
-        '0_1': ['0_2','-1_1','0_1','1_1'],       
-        '1_1': ['2_2','0_1','1_1','1_0'],       
-        '-1_0': ['-1_1','-2_0','-1_0','-1_-1'],       
-        '1_0': ['1_1','1_0','2_0','1_-1'],       
-        '-1_-1': ['-1_0','-1_-1','0_-1','-2_-2'],       
-        '0_-1': ['-1_-1','0_-1','1_-1','0_-2'],       
-        '1_-1': ['1_0','0_-1','1_-1','2_-2'],       
-    }
-)
-
-const _ability_mage_0 = new Shape(
-    10,
-    {
-        '-3_3': ['-4_4','-3_4','-4_3','-3_3'],       
-        '0_3': ['0_4','-1_3','0_3','1_3'],       
-        '3_3': ['3_4','4_4','3_3','4_3'],       
-        '-3_0': ['-3_1','-4_0','-3_0','-3_-1'],       
-        '3_0': ['3_1','3_0','4_0','3_-1'],       
-        '-3_-3': ['-4_-3','-3_-3','-4_-4','-3_-4'],       
-        '0_-3': ['-1_-3','0_-3','1_-3','0_-4'],       
-        '3_-3': ['3_-3','4_-3','3_-4','4_-4'],       
-    }
-)
-
 const SHAPES = {
     none,
-    _0_rhombus,
-    _1_king,
-    _1_rhombus,
-    _1_cross,
+    _1_12_,
+    _1_8_1_,
+    _1_16_1_,
+    _1_1_5_,
     _2_straight,
     _2_cross,
     _2_rhombus,
@@ -265,8 +231,6 @@ const SHAPES = {
     _3_5_,
     _3_straight,
     _3_cross,
-    _ability_warrior_0,
-    _ability_mage_0,
 }
 
 module.exports = SHAPES;

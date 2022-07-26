@@ -5,11 +5,11 @@ const configuration = require('./configuration');
 const { inventorySize, unitsInitialHealth } = configuration;
 
 class Player {
-    constructor(id, deck, numberOfAvailableAbilitiesSlots = 0) {
+    constructor(id, deck, availableAbilitiesSlots = 0) {
         this.id = id
         this.unit = deck.unit
         this.deck = deck
-        this.movements = MOVEMENTS._0_rhombus
+        this.movements = MOVEMENTS._1_12_
         this.inventory = new Inventory(inventorySize)
         this.health = unitsInitialHealth
         this.color
@@ -17,7 +17,7 @@ class Player {
         this.coordinates
         this.position
         this.abilitiesSlots = []
-        this.numberOfAvailableAbilitiesSlots = numberOfAvailableAbilitiesSlots
+        this.availableAbilitiesSlots = availableAbilitiesSlots
         this.turnHistory = []
         this.wishedTurn = []
         this.positionsAtSteps = Array(4).fill(null)
@@ -56,12 +56,12 @@ class Player {
         return this.position
     }
     unblockAbilitySlot = () => {
-        if (this.numberOfAvailableAbilitiesSlots < configuration.maxAbilitiesSlots) {
-            this.numberOfAvailableAbilitiesSlots++
+        if (this.availableAbilitiesSlots < configuration.maxAbilitiesSlots) {
+            this.availableAbilitiesSlots++
         }
     }
     drawCards = () => {
-        while (this.abilitiesSlots.length <= this.numberOfAvailableAbilitiesSlots ) {
+        while (this.abilitiesSlots.length <= this.availableAbilitiesSlots ) {
             const card = this.deck.getRandomCard()
             this.abilitiesSlots.push(card)
         }

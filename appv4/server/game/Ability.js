@@ -29,9 +29,8 @@
     //     {
     //         keyword: 'damage',
     //         target: 'enemy',
-    //         sustain: 'true',
+    //         sustain: '4',
     //         value: 2,
-    //         turns: 4,
     //     },
     //     {
     //         keyword: 'fast',
@@ -44,16 +43,14 @@
     //     {
     //         keyword: 'heal',
     //         target: 'caster',
-    //         sustain: true,
+    //         sustain: 3,
     //         value: 2,
-    //         turns: 3,
     //     },
     //     {
     //         keyword: 'heal',
     //         target: 'ally',
-    //         sustain: true,
+    //         sustain: 2,
     //         value: 3,
-    //         turns: 2,
     //     },
     //     { 
     //          keyword: 'move',
@@ -73,8 +70,7 @@
     //              keyword: 'damage'
     //              target: 'all',
     //              value: 5
-    //              sustain: true,
-    //              turns: 2,
+    //              sustain: 2,
     //          }
     //          turns: 3,
     //     },

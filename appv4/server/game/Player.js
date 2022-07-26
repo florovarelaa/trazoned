@@ -1,6 +1,6 @@
 const Inventory = require('./Inventory');
 const Turn = require('./Turn');
-const MOVEMENTS = require('../abilities/movements/movements')
+const MOVEMENTS = require('./Instances/abilities/movements/movements')
 const configuration = require('./configuration');
 const { inventorySize, unitsInitialHealth } = configuration;
 

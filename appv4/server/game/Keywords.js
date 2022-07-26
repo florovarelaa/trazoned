@@ -23,8 +23,9 @@ const keywords = {
         firstly: 'firstly',
         secondly: 'secondly',
         area: 'area',
-        block: 'areaBlock',
-        modifier: 'modifier',
+        areaBlock: 'areaBlock',
+        incoming_modifier: 'incoming_modifier',
+        outgoing_modifier: 'outgoing_modifier',
     },
     // used for the ability target
     target: {

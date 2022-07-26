@@ -5,8 +5,7 @@ class MapTile {
 //              keyword: 'damage'
 //              target: 'all',
 //              value: 5
-//              sustain: true,
-//              turns: 2,
+//              sustain: 2,
 //          }
 //          turns: 3,
     //     },

@@ -16,7 +16,7 @@ const ability_warrior_1 = new Ability(
     'warrior_1',
     configuration.abilityTypes.ABILITY,
     SHAPES._1_king,
-    'deal damage to enemy units',
+    'daño muy fuerte 1 casilla',
     [],
     ability_warrior_1_targetEffects
 )
@@ -34,7 +34,7 @@ const ability_warrior_2 = new Ability(
     'warrior_2',
     configuration.abilityTypes.ABILITY,
     SHAPES._0_rhombus,
-    'deal damage to enemy units',
+    'daño medio hasta 2 casillas',
     [],
     ability_warrior_2_targetEffects
 )
@@ -52,7 +52,7 @@ const ability_warrior_3 = new Ability(
     'warrior_3',
     configuration.abilityTypes.ABILITY,
     SHAPES._1_king,
-    'deal damage to enemy units',
+    'fast: daño debil 1 casilla',
     [keywords.caster.fast],
     ability_warrior_3_targetEffects
 )
@@ -74,7 +74,7 @@ const ability_warrior_4 = new Ability(
     'warrior_4',
     configuration.abilityTypes.ABILITY,
     SHAPES._0_rhombus,
-    'deal damage to units and exhaust them',
+    'daño muy debil hasta 2 casillas. aplica exhaust',
     [],
     ability_warrior_4_targetEffects
 )
@@ -93,28 +93,27 @@ const ability_warrior_5 = new Ability(
     'warrior_5',
     configuration.abilityTypes.ABILITY,
     SHAPES._1_rhombus,
-    'move to the selected unit',
+    'movimiento 2 casillas',
     [],
     ability_warrior_5_targetEffects
 )
 
 const ability_warrior_6_targetEffects = [
     {
-        keyword: keywords.effect.modifier,
+        keyword: keywords.effect.incoming_modifier,
         target: keywords.target.caster,
         value: keywords.damage[1],
         type: keywords.effect.damage,
-        sustain: true,
-        turns: 2,
+        sustain: 2,
     }
 ]
 
 const ability_warrior_6 = new Ability(
-    105,
+    106,
     'warrior_6',
     configuration.abilityTypes.ABILITY,
     SHAPES.none,
-    'gain a shield that absorbs 1 from all damage',
+    'hybrid: Sustain(2): -1 de daño de todas las fuentes',
     [keywords.caster.hybrid],
     ability_warrior_6_targetEffects
 )

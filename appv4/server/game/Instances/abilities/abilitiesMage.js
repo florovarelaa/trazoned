@@ -43,7 +43,7 @@ const ability_mage_3_targetEffects = [
     {
             keyword: 'areaBlock',
             target: 'all',
-            turns: 3,
+            sustains: 3,
     },
 ]
 

@@ -1,24 +1,3 @@
-class MapTile {
-    //     {
-//          keyword: 'area',
-//          effect: {
-//              keyword: 'damage'
-//              target: 'all',
-//              value: 5
-//              sustain: 2,
-//          }
-//          turns: 3,
-    //     },
-    //     {
-//          keyword: 'areaBlock',
-//          target: all | ally | enemy,
-//          turns: 3,
-    //     },
-    constructor() {
-
-    }
-}
-
 class Map {
     constructor(mapSize) {
         const mapCenter = Math.floor(mapSize/2)

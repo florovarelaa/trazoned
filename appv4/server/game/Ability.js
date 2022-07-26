@@ -72,12 +72,12 @@
     //              value: 5
     //              sustain: 2,
     //          }
-    //          turns: 3,
+    //          sustains: 3,
     //     },
     //     {
     //          keyword: 'areaBlock',
     //          target: all | ally | enemy,
-    //          turns: 3,
+    //          sustains: 3,
     //     },
     //      {
     //          keyword: targeted, abilities with this keyword must have a shape with all cells available to a distance, a rhombus shape

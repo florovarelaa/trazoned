@@ -1,3 +1,3 @@
 const Unit = require("../../Unit");
 
-const warrior = new Unit('healer', )
+const healer = new Unit('healer', )

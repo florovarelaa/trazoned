@@ -1,14 +1,15 @@
 const Inventory = require('./Inventory');
 const Turn = require('./Turn');
+const MOVEMENTS = require('../abilities/movements/movements')
 const configuration = require('./configuration');
 const { inventorySize, unitsInitialHealth } = configuration;
 
 class Player {
-    constructor(id, deck, movements, numberOfAvailableAbilitiesSlots = 0) {
+    constructor(id, deck, numberOfAvailableAbilitiesSlots = 0) {
         this.id = id
         this.unit = deck.unit
         this.deck = deck
-        this.movements = movements
+        this.movements = MOVEMENTS._0_rhombus
         this.inventory = new Inventory(inventorySize)
         this.health = unitsInitialHealth
         this.color

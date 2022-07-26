@@ -8,10 +8,6 @@ const keywords = {
         firstly: 'firstly',
         secondly: 'secondly',
         hybrid: 'hybrid',
-        token_a: 'token_a',
-        token_b: 'token_b',
-        token_c: 'token_c',
-        token_d: 'token_d',
     },
     // used for the ability target effect
     effect: {
@@ -28,12 +24,20 @@ const keywords = {
         secondly: 'secondly',
         area: 'area',
         block: 'areaBlock',
+        modifier: 'modifier',
     },
     // used for the ability target
     target: {
         caster: 'caster',
         enemy: 'enemy',
         ally: 'ally',
+    },
+    damage: {
+        5: 5,
+        4: 4,
+        3: 3,
+        2: 2,
+        1: 1
     }
 }
 

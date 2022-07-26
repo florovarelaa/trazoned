@@ -13,8 +13,6 @@ const configuration = {
     abilityTypes: {
         ABILITY: 1,
         MOVEMENT: 2,
-        EQUIPMENT: 3,
-        ITEM: 4
     },
 }
 

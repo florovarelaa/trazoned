@@ -20,7 +20,7 @@ const ability_mage_1_targetEffects = [
 ]
                 
 const ability_mage_0 = new Ability(
-    102,
+    202,
     'mage_0',
     configuration.abilityTypes.ABILITY,
     SHAPES._ability_mage_0,
@@ -30,7 +30,7 @@ const ability_mage_0 = new Ability(
 )
 
 const ability_mage_1 = new Ability(
-    103,
+    203,
     'mage_1',
     configuration.abilityTypes.ABILITY,
     SHAPES._1_king,

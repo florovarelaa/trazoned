@@ -11,6 +11,16 @@ const movement_targetEffects = [
     }
 ]
 
+const _0_rhombus = new Ability(
+    0,
+    'rhombus',
+    configuration.abilityTypes.MOVEMENT,
+    SHAPES._0_rhombus,
+    'Move to selected cell',
+    [],
+    movement_targetEffects
+)
+
 const _1_king = new Ability(
     1,
     '1 king',
@@ -92,6 +102,7 @@ const _3_cross = new Ability(
 )
 
 const MOVEMENTS = {
+    _0_rhombus,
     _1_king,
     _2_knight,
     _2_invertedKnight,

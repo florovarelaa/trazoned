@@ -1,24 +1,8 @@
 const Player = require('../../Player')
 const Deck = require('../../Deck')
 const Unit = require('../../Unit')
-const MOVEMENTS = require('../abilities/movements/movements')
 const abilities = require('../abilities/abilities')
 
-const player1Movements =
-{
-    1: MOVEMENTS._1_king,
-    2: MOVEMENTS._2_cross,
-    3: MOVEMENTS._2_knight,
-    4: MOVEMENTS._3_straight
-}
-
-const player2Movements =
-{
-    1: MOVEMENTS._1_king,
-    2: MOVEMENTS._2_straight,
-    3: MOVEMENTS._2_invertedKnight,
-    4: MOVEMENTS._3_cross
-}
 let mage = new Unit('mage', abilities.mage_abilities)
 let warrior = new Unit('warrior', abilities.warrior_abilities)
 
@@ -27,10 +11,10 @@ const deckPlayer2 = new Deck(mage)
 
 function simulatedPlayers() {
     this.newPlayer0 = () => {
-        return new Player(1, deckPlayer1, player1Movements)
+        return new Player(1, deckPlayer1)
     },
     this.newPlayer1 = () => {
-        return new Player(2, deckPlayer2, player2Movements)
+        return new Player(2, deckPlayer2)
     }
     this.players = [this.newPlayer0(), this.newPlayer1()]
     // this.newRandomPlayer = () => {

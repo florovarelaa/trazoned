@@ -5,10 +5,11 @@ const configuration = require('./configuration');
 const { inventorySize, unitsInitialHealth } = configuration;
 
 class Player {
-    constructor(id, deck, availableAbilitiesSlots = 0) {
+    constructor(id, deck) {
         this.id = id
         this.unit = deck.unit
         this.deck = deck
+        this.hand = []
         this.movements = MOVEMENTS._1_12_
         this.inventory = new Inventory(inventorySize)
         this.health = unitsInitialHealth
@@ -16,22 +17,17 @@ class Player {
         this.startingCoordinates
         this.coordinates
         this.position
-        this.abilitiesSlots = []
-        this.availableAbilitiesSlots = availableAbilitiesSlots
         this.turnHistory = []
         this.wishedTurn = []
         this.positionsAtSteps = Array(4).fill(null)
-        this.abilities = {
-            1: deck.unit.basicAbility1,
-            2: deck.unit.basicAbility2
-        }
         this.equipment = {
             armor: null,
             weapon: null,
             amulet: null,
         }
+        this.drawCards()
     }
-    setColor(color) {
+    setColor = (color) => {
         this.color = color
     }
     isAlive = () => {
@@ -49,25 +45,34 @@ class Player {
     setCoordinates = (coordinates) => {
         this.coordinates = coordinates
     }
-    setPosition (position) {
+    setPosition = (position) => {
         this.position = position
     }
-    getPosition () {
+    getPosition = () => {
         return this.position
     }
-    unblockAbilitySlot = () => {
-        if (this.availableAbilitiesSlots < configuration.maxAbilitiesSlots) {
-            this.availableAbilitiesSlots++
+    drawCard = () => {
+        let card;
+        if (this.hand.length <= configuration.handSize ) {
+            card = this.deck.getRandomCard()
+            while (this.hand.includes(card)) {
+                card = this.deck.getRandomCard()
+            }
+            this.hand.push(card)
         }
     }
     drawCards = () => {
-        while (this.abilitiesSlots.length <= this.availableAbilitiesSlots ) {
-            const card = this.deck.getRandomCard()
-            this.abilitiesSlots.push(card)
+        let card;
+        while (this.hand.length <= configuration.handSize ) {
+            card = this.deck.getRandomCard()
+            while (this.hand.includes(card)) {
+                card = this.deck.getRandomCard()
+            }
+            this.hand.push(card)
         }
     }
-    getBasicAbilities = () => {
-        return Object.values(this.abilities)
+    getHand = () => {
+        return this.hand
     } 
     getMovements = () => {
         return Object.values(this.movements)

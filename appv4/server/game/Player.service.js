@@ -2,11 +2,6 @@ const configuration = require("./configuration");
 
 class PlayerService {
     constructor() {}
-    unblockPlayersAbilitySlot(players) {
-        players.forEach((player) => {
-            player.unblockAbilitySlot()
-        });
-    }
     playersDrawCards(players) {
         players.forEach((player) => {
             player.drawCards()
@@ -20,7 +15,7 @@ class PlayerService {
         let playerAbility;
         switch (abilityType) {
             case configuration.abilityTypes.ABILITY:
-                const basicAbilities = player.getBasicAbilities();
+                const basicAbilities = player.getHand();
                 playerAbility = basicAbilities.filter( ability => ability.id === abilityId)
                 break;
         

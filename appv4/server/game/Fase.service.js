@@ -6,10 +6,6 @@ class FaseService {
     constructor() {}
     initFirstFase(game) {
         game.setFase(1)
-        const turn = game.getTurnNumber()
-        if (turn === 1 || turn % 3 === 0) {
-            PlayerService.unblockPlayersAbilitySlot(game.players)
-        }
         PlayerService.playersDrawCards(game.players) 
     }
     startFirstFase(game) {

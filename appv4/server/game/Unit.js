@@ -1,9 +1,8 @@
 class Unit {
-    constructor(name, basicAbilities) {
+    constructor(name, abilities) {
         this.id
         this.name = name
-        this.basicAbility1 = Object.values(basicAbilities)[0];
-        this.basicAbility2 = Object.values(basicAbilities)[1]
+        this.abilities = abilities
     }
     setPlayerId = (playerId) => {
         this.playerId = playerId

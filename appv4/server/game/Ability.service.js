@@ -50,7 +50,6 @@ class AbilityService {
 
         // get player position at step
         const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
-        console.log('ability: ', ability);
 
         let positionInAvailablePositions
         try {
@@ -73,6 +72,8 @@ class AbilityService {
 
         const coordinates = this.getCoordinatesFromPosition(position);
         
+        console.log('ability: ', ability)
+
         const abilityShapePositions = ability.shape.positions
 
         const addedPositions = this.addCoordiantesAndPositions(coordinates, abilityShapePositions)

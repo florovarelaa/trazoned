@@ -3,8 +3,8 @@ const { deckSize } = configuration
 
 class Deck {
     constructor(unit) {
-        this.unit = unit
-        this.cards = ['card1Id', 'card2Id', 'card3Id', 'card4Id']
+        this.unitName = unit.name
+        this.cards = unit.abilities;
     }
     addCard(card) {
         if(this.cards.length < deckSize) {
@@ -14,7 +14,7 @@ class Deck {
         }
     }
     getRandomCard() {
-        const randomCard = this.cards[Math.floor(Math.random() * this.cards.length)];
+        const randomCard = Object.values(this.cards)[Math.floor(Math.random() * Object.keys(this.cards).length)];
         return randomCard;
     }
 }

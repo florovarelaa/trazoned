@@ -2,7 +2,10 @@ const Shape = require('../../Shape')
 
 // MOVEMENTS
 
-const none = {}
+const none = new Shape(
+    00,
+    {}
+)
 
 // --- 0 ---
 

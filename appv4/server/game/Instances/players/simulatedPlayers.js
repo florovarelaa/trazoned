@@ -1,22 +1,27 @@
 const Player = require('../../Player')
 const Deck = require('../../Deck')
 const Unit = require('../../Unit')
-const abilities = require('../abilities/abilities')
+const { warrior_abilities, mage_abilities, ranger_abilities } = require('../abilities/abilities')
 
-let mage = new Unit('mage', abilities.mage_abilities)
-let warrior = new Unit('warrior', abilities.warrior_abilities)
+const warrior = new Unit('warrior', warrior_abilities);
+const mage = new Unit('mage', mage_abilities);
+const ranger = new Unit('ranger', ranger_abilities);
 
-const deckPlayer1 = new Deck(warrior)
-const deckPlayer2 = new Deck(mage)
+const warriorDeck = new Deck(warrior)
+const mageDeck = new Deck(mage)
+const rangerDeck = new Deck(ranger)
 
 function simulatedPlayers() {
-    this.newPlayer0 = () => {
-        return new Player(1, deckPlayer1)
-    },
     this.newPlayer1 = () => {
-        return new Player(2, deckPlayer2)
-    }
-    this.players = [this.newPlayer0(), this.newPlayer1()]
+        return new Player(1, warriorDeck)
+    },
+    this.newPlayer2 = () => {
+        return new Player(2, mageDeck)
+    },
+    this.newPlayer3 = () => {
+        return new Player(3, rangerDeck)
+    },
+    this.players = [this.newPlayer1(), this.newPlayer2()]
     // this.newRandomPlayer = () => {
 
     //     function getRandomInt(max) {

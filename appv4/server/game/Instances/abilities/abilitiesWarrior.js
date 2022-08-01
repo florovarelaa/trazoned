@@ -114,7 +114,7 @@ const ability_warrior_6 = new Ability(
     configuration.abilityTypes.ABILITY,
     SHAPES.none,
     'hybrid: Sustain(2): -1 de daño de todas las fuentes',
-    [keywords.caster.hybrid],
+    [keywords.caster.self, keywords.caster.hybrid],
     ability_warrior_6_targetEffects
 )
 

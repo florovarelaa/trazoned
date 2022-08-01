@@ -4,7 +4,9 @@ const Shape = require('../../Shape')
 
 const none = new Shape(
     00,
-    {}
+    {
+        '0_0': ['0_0']
+    }
 )
 
 // --- 0 ---

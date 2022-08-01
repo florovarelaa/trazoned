@@ -100,11 +100,14 @@ class Game {
         const abilityToUse = Object.values(player1.hand)[0]
         const availablePositions = AbilityService.handlePlayerWantToUseAbility(this, player1.id, abilityToUse, step)
 
+        // if the abilitiy to use will be cast on the player casting it as a buff or debuff it will have the self keyword.
+        // Available positions are not needed.
+        // So it will immediatly trigger the handlePlayerUseAbilityMethod.
+
         console.log('abilityToUse: ', abilityToUse)
-        console.log('availablePositions: ', availablePositions)
         const chosenPosition = Object.keys(availablePositions)[0]
-        console.log('chosenPosition: ', chosenPosition);
-        const playerUseAbility = AbilityService.handlePlayerUseAbility(this, player1.id, abilityToUse, chosenPosition, step)
+        AbilityService.handlePlayerUseAbility(this, player1.id, abilityToUse, chosenPosition, step)
+        console.log('player1: ', player1)
     }
 }
 

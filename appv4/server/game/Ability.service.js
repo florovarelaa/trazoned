@@ -1,6 +1,7 @@
 const configuration = require('./configuration');
 const PlayerService = require('./Player.service');
 const MapService = require('./Map.service');
+const keywords = require('./Keywords');
 
 class AbilityService {
     constructor(mapSize) {
@@ -48,6 +49,12 @@ class AbilityService {
             return          
         }
 
+        if (ability.keywords.includes(keywords.caster.self)) {
+            console.log('entro aca. Esta mal. no deberia')
+            PlayerService.setPlayerWishedTurn(game, playerId, ability.id, 'A_A', step)
+            return
+        }
+
         // get player position at step
         const playerPositionAtStep = PlayerService.getPositionAtStep(player, step)
 
@@ -63,7 +70,6 @@ class AbilityService {
         // convert from chosenPosition to the matching key on the ability. (chosen key - player position)
         const playerPosition = player.getPosition()
 
-        console.log('playerPosition: ', playerPosition);
         const abilityChosenPosition = this.fromPlayerChosenPositionToAbilityPosition(playerPosition, chosenPosition, ability)
         // TODO set player wished turn
         PlayerService.setPlayerWishedTurn(game, playerId, ability.id, abilityChosenPosition, step)
@@ -72,10 +78,7 @@ class AbilityService {
 
         const coordinates = this.getCoordinatesFromPosition(position);
         
-        console.log('ability: ', ability)
-
         const abilityShapePositions = ability.shape.positions
-
         const addedPositions = this.addCoordiantesAndPositions(coordinates, abilityShapePositions)
         return addedPositions
     }

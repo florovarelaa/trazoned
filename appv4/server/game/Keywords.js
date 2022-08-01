@@ -8,6 +8,7 @@ const keywords = {
         firstly: 'firstly',
         secondly: 'secondly',
         hybrid: 'hybrid',
+        self: 'self',
     },
     // used for the ability target effect
     effect: {

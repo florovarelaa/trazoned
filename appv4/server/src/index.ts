@@ -3,10 +3,12 @@ const app = express();
 import * as http from 'http'
 const server = http.createServer(app);
 
-import { simulatedPlayers } from './Instances/players/simulatedPlayers';
+import { SimulatedPlayers } from './Instances/players/simulatedPlayers';
 import { Game } from './Game';
 
-const game = new Game(new simulatedPlayers().players);
+const simulatedPlayers = new SimulatedPlayers().players
+
+const game = new Game(simulatedPlayers);
 
 server.listen(3000, () => {
     game.init();

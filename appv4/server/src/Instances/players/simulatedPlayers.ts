@@ -13,22 +13,20 @@ const warriorDeck = new Deck(warrior)
 const mageDeck = new Deck(mage)
 const rangerDeck = new Deck(ranger)
 
-export class simulatedPlayers {
-    newPlayer1: () => any;
-    newPlayer2: () => any;
-    newPlayer3: () => any;
-    players: any[];
+export class SimulatedPlayers {
+    private players: InstanceType<typeof Player>[];
     constructor() {
-    this.newPlayer1 = () => {
+        this.players = [this.newPlayer1(), this.newPlayer2(), this.newPlayer3()]
+    }
+    newPlayer1(): void {
         return new Player(1, warriorDeck)
-    },
-    this.newPlayer2 = () => {
+    }
+    newPlayer2(): void {
         return new Player(2, mageDeck)
-    },
-    this.newPlayer3 = () => {
+    }
+    newPlayer3(): void {
         return new Player(3, rangerDeck)
-    },
-    this.players = [this.newPlayer1(), this.newPlayer2()]
+    }
     // this.newRandomPlayer = () => {
 
     //     function getRandomInt(max) {
@@ -85,5 +83,4 @@ export class simulatedPlayers {
         
     //     let playerUnits = [playerFirstUnit, playerSecondUnit]
     //     return new Player(null, playerMovement, playerUnits)
-    }
 }  
